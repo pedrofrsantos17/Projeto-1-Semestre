@@ -1,28 +1,88 @@
-.card3 {
-display: flex;
-    justify-content: center;
-    align-items: center;
-margin-top: 50px;
-
-}
-
-
-
-.card {
+body {
+    margin: 0;
+    height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;    
-    font-family: Arial, sans-serif;
-    margin-top: 50px;
-    padding: 40px 16px;
-    background: gray;
-    width: 600px;
-    height: 400px;
+    align-items: center;
+    background-image: linear-gradient(rgba(21, 11, 16, 0.60), rgba(21, 11, 16, 0.60)), url(vinhedo4.avif);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.card2 {
-    width: 200px;
-    height: 100px;
-    padding: 20px;
-    background: gainsboro;
+.card {
+    font-family: Arial, sans-serif;
+    width: 450px;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    border-radius: 20px;
+    background: linear-gradient(160deg, #5A1A2E, #150B10);
+    border: 5px solid #DBAE38;
+    border-color: #DBAE38;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+    gap: 20px;
+}
+
+.card h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 9px 0;
+    color: #DBAE38;
+    font-size: 40px;
+}
+
+.campo {
+    display: flex;
+    align-items: center;
+    padding: 13px 16px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(219, 174, 56, 0.5);
+}
+
+
+.icone {
+    margin-right: 10px;
+    font-size: 14px;
+    filter: grayscale(1) brightness(3);
+}
+
+.campo input {
+    flex: 1;
+    padding: 4px 6px;
+    min-width: 0;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: #F3EBD3;
+    font-size: 13px;
+}
+
+.campo input::placeholder {
+    color: rgba(243, 235, 211, 0.75);
+}
+
+
+.campo input::placeholder {
+    color: rgba(243, 235, 211, 0.75);
+}
+
+
+
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #DBAE38;
+    background: #2F5D3A;
+    color: #F3EBD3;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #3A7348;
 }
