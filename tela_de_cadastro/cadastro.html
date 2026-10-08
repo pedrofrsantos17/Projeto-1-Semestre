@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div id="div_cadastro">
+        <h3>Cadastro</h3>
+        Nome de usuário :<input type="text" id="ipt_nome_usuario"><br>
+        Email :<input type="text" id="ipt_email"><br>
+        Senha :<input type="password" id="ipt_senha"><br><br>
+        <button onclick="AGA()">Cadastrar</button>
+    </div>
+
+    <div id="div_opcoes" style="display: none;">
+        <h3>Agora, associe-se a uma empresa</h3>
+        <button onclick="MostrarEntrar()">Entrar em uma empresa</button>
+        <button onclick="MostrarCriar()">Criar uma empresa</button>
+    </div>
+
+    <div id="div_entrar" style="display: none;">
+        <h4>Entrar em uma empresa</h4>
+        Código de cadastro da empresa :<input type="text" id="ipt_codigo_cadastro"><br>
+        Email empresarial :<input type="text" id="ipt_email_empresarial"><br><br>
+        <button onclick="EntrarEmpresa()">Entrar</button>
+    </div>
+
+    <div id="div_criar" style="display: none;">
+        <h4>Criar uma empresa</h4>
+        Nome da empresa :<input type="text" id="ipt_nome_empresa"><br>
+        CNPJ da empresa :<input type="text" id="ipt_cnpj_empresa"><br>
+        Base do email da empresa (ex: valeverdevinhos.com) :<input type="text" id="ipt_email_base"><br><br>
+        <button onclick="CriarEmpresa()">Criar empresa</button>
+    </div>
+
+    <div id="exibir"></div>
+
+</body>
+<script>
+
+    let usuario = [];
+    let empresa = [];
+    let atual = -1;
+
+    function AGA() {
+        let nome_usuario = ipt_nome_usuario.value;
+        let email = ipt_email.value;
+        let senha = ipt_senha.value;
+        let existe = false;
+
+        if (nome_usuario == "" || email == "" || senha == "") {
+            alert(`Preencha nome, email e senha`)
+        }
+        else {
+            for (let i = 0; i < usuario.length; i++) {
+                if (usuario[i].email == email) {
+                    existe = true;
+                }
+            }
+
+            if (existe) {
+                alert(`Esse email já está cadastrado`)
+            }
+            else {
+                usuario.push({
+                    id_usuario: usuario.length + 1,
+                    fk_empresa: null,
+                    nome_usuario: nome_usuario,
+                    email: email,
+                    senha: senha,
+                    ativo: 1
+                });
+
+                atual = usuario.length - 1;
+
+                div_cadastro.style.display = "none";
+                div_opcoes.style.display = "block";
+                exibir.innerHTML = `Usuário ${nome_usuario} cadastrado! Agora entre em uma empresa ou crie a sua.`;
+            }
+        }
+    }
+
+    function MostrarEntrar() {
+        div_entrar.style.display = "block";
+        div_criar.style.display = "none";
+    }
+
+    function MostrarCriar() {
+        div_criar.style.display = "block";
+        div_entrar.style.display = "none";
+    }
+
+    function EntrarEmpresa() {
+        let codigo_cadastro = ipt_codigo_cadastro.value;
+        let email_empresarial = ipt_email_empresarial.value;
+        let achou = null;
+
+        if (codigo_cadastro == "" || email_empresarial == "") {
+            alert(`Preencha o código da empresa e o email empresarial`)
+        }
+        else {
+            for (let i = 0; i < empresa.length; i++) {
+                if (empresa[i].codigo_cadastro == codigo_cadastro) {
+                    achou = empresa[i];
+                }
+            }
+
+            if (achou == null) {
+                alert(`Código de cadastro da empresa não encontrado`)
+            }
+            else if (!email_empresarial.includes("@" + achou.email_base)) {
+                alert(`Esse email não pertence à empresa ${achou.nome_empresa}`)
+            }
+            else {
+                usuario[atual].fk_empresa = achou.id_empresa;
+
+                div_opcoes.style.display = "none";
+                div_entrar.style.display = "none";
+                div_criar.style.display = "none";
+                exibir.innerHTML = `${usuario[atual].nome_usuario} agora faz parte da empresa ${achou.nome_empresa}!`;
+            }
+        }
+    }
+
+    function CriarEmpresa() {
+        let nome_empresa = ipt_nome_empresa.value;
+        let cnpj_empresa = ipt_cnpj_empresa.value;
+        let email_base = ipt_email_base.value;
+        let existe = false;
+        let numero = empresa.length + 1;
+
+        if (nome_empresa == "" || cnpj_empresa == "" || email_base == "") {
+            alert(`Preencha nome, CNPJ e a base do email da empresa`)
+        }
+        else {
+            for (let i = 0; i < empresa.length; i++) {
+                if (empresa[i].cnpj_empresa == cnpj_empresa) {
+                    existe = true;
+                }
+            }
+
+            if (existe) {
+                alert(`Esse CNPJ já está cadastrado`)
+            }
+            else {
+                if (numero < 10) {
+                    numero = "0" + numero;
+                }
+
+                let codigo_cadastro = `EMP-2027-${numero}`;
+
+                empresa.push({
+                    id_empresa: empresa.length + 1,
+                    nome_empresa: nome_empresa,
+                    cnpj_empresa: cnpj_empresa,
+                    email_base: email_base,
+                    codigo_cadastro: codigo_cadastro
+                });
+
+                usuario[atual].fk_empresa = empresa.length;
+
+                div_opcoes.style.display = "none";
+                div_entrar.style.display = "none";
+                div_criar.style.display = "none";
+                exibir.innerHTML = `Empresa ${nome_empresa} criada!<br>`;
+                exibir.innerHTML = exibir.innerHTML + `Código para os funcionários e clientes entrarem: <b>${codigo_cadastro}</b>`;
+            }
+        }
+    }
+
+</script>
+
+</html>
