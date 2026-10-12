@@ -1,0 +1,224 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+ :root {
+      --wine: #4a111b;
+      --wine2: #6d2029;
+      --ink: #21191a;
+      --cream: #f5f1ea;
+      --paper: #fbfaf7;
+      --gold: #b89a63;
+      --muted: #756d69;
+      --line: #d9d1c7;
+      --green: #536b58;
+      --shadow: 0 24px 70px rgba(44, 18, 20, .12);
+ }
+
+
+body {
+    background-color: #111113;
+    font-family: 'Manrope', sans-serif;
+}
+
+
+.header {
+    /* Aqui é para garantir que o reader fique estatico */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    /* define posição quanto aos outros elementos*/
+    border-bottom: 1px solid #594A37;
+
+}
+
+.header section {
+    font-family: 'Manrope', sans-serif;
+    background-color: #111113;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+}
+
+.header a {
+    text-decoration: none;
+    color: #d5cdc2;
+
+}
+
+.header p {
+    font-family: "Cormorant Garamond", serif;
+    font-size: 30px;
+    color: #C6A56B;
+    margin: 0;
+    line-height: 1;
+}
+
+.header small {
+    display: block;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    color: #C6A56B;
+
+}
+
+.header a:hover {
+    color: #C6A56B;
+}
+
+.nav {
+    display: flex;
+    gap: 24px;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+
+}
+
+.nav-acesso a {
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+
+.nav-acesso .cad {
+    background-color: #306044;
+    font-weight: bold;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+
+}
+
+.nav-acesso .log {
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 10px;
+    border-color: #C6A56B;
+    border-style: solid;
+    border-width: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+
+}
+
+.inner {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+    margin-left: 8vw;
+    padding-top: 80px;
+}
+
+.sectionHero {
+    background-image: url("Fundo_Pinot_Noir.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 120px;
+    min-height: 100vh;
+}
+
+.titulo1 {
+    font-size: 10px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: #C6A56B;
+    font-weight: 700;
+    margin-bottom: 17px
+}
+
+h1,h2,h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 500
+    }
+
+h1 {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(65px, 9vw, 132px);
+    line-height: .78;
+    color: #d5cdc2;
+    letter-spacing: -.03em;
+    font-weight: 500;
+
+}
+
+.sub {
+    color: #d9d1c7;
+}
+
+/* classe que controla a posição dos botões da hero.actions*/
+.hero-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px
+    }
+
+/* configuração do botão conheça a soluçãp*/
+.btnprimary  {
+    padding: 10px 20px;
+    border-radius: 999px;
+    text-decoration: none;
+    background-color: #306044;
+    border-color: #5e8c6a;
+    font-weight: bold;
+    font-size: 12px;
+    color: #d5cdc2;
+}
+
+/* configuração do botão simule um cenario*/
+.btn {
+    padding: 10px 20px;
+    border-radius: 999px;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 12px;
+    border-color: #C6A56B;
+    border-style: solid;
+    border-width: 1px;
+    color: #d5cdc2;
+}
+
+/* marca no canto direito da primeira tela*/
+.hero-mark {
+    background: rgba(22, 43, 29, .55);
+      border-color: #5e8c6a;
+      color: #b89a63;
+      position: absolute;
+      right: 7vw;
+      bottom: 13vh;
+      width: 180px;
+      height: 180px;
+      border: 1px solid rgba(232, 212, 173, .35);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #e8d4ad;
+      z-index: 2 /* define a posição dos objetos, oq fica na frente*/
+    }
+
+     .hero-mark span {
+      text-align: center;
+      font-family: "Cormorant Garamond";
+      font-size: 24px;
+      line-height: .9
+    }
+
+.scroll {
+    display: flex;
+      gap: 12px;
+      margin-top: 80px;
+      right: 7px;
+      color: #d5cdc2;
+}
