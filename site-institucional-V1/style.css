@@ -5,23 +5,32 @@
 
 }
 
- :root {
-      --wine: #4a111b;
-      --wine2: #6d2029;
-      --ink: #21191a;
-      --cream: #f5f1ea;
-      --paper: #fbfaf7;
-      --gold: #b89a63;
-      --muted: #756d69;
-      --line: #d9d1c7;
-      --green: #536b58;
-      --shadow: 0 24px 70px rgba(44, 18, 20, .12);
- }
+:root {
+    --wine: #4a111b;
+    --wine2: #6d2029;
+    --ink: #21191a;
+    --cream: #f5f1ea;
+    --paper: #fbfaf7;
+    --gold: #b89a63;
+    --muted: #756d69;
+    --line: #d9d1c7;
+    --green: #536b58;
+    --shadow: 0 24px 70px rgba(44, 18, 20, .12);
+}
 
 
 body {
     background-color: #111113;
     font-family: 'Manrope', sans-serif;
+}
+
+/* Configurações gerais das seções */
+.section {
+    min-height: 100vh;
+    padding: 120px 7vw 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 
@@ -139,10 +148,20 @@ body {
     margin-bottom: 17px
 }
 
-h1,h2,h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-weight: 500
+.sub {
+      margin-top: 28px;
+      color: rgba(255, 248, 238, .78);
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 590px
     }
+
+h1,
+h2,
+h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500
+}
 
 h1 {
     font-family: "Cormorant Garamond", serif;
@@ -154,19 +173,16 @@ h1 {
 
 }
 
-.sub {
-    color: #d9d1c7;
-}
 
 /* classe que controla a posição dos botões da hero.actions*/
 .hero-actions {
-      display: flex;
-      gap: 12px;
-      margin-top: 36px
-    }
+    display: flex;
+    gap: 12px;
+    margin-top: 36px
+}
 
 /* configuração do botão conheça a soluçãp*/
-.btnprimary  {
+.btnprimary {
     padding: 10px 20px;
     border-radius: 999px;
     text-decoration: none;
@@ -193,35 +209,134 @@ h1 {
 /* marca no canto direito da primeira tela*/
 .hero-mark {
     background: rgba(22, 43, 29, .55);
-      border-color: #5e8c6a;
-      color: #b89a63;
-      position: absolute;
-      right: 7vw;
-      bottom: 13vh;
-      width: 180px;
-      height: 180px;
-      border: 1px solid rgba(232, 212, 173, .35);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: #e8d4ad;
-      z-index: 2 /* define a posição dos objetos, oq fica na frente*/
-    }
+    border-color: #5e8c6a;
+    color: #b89a63;
+    position: absolute;
+    right: 7vw;
+    bottom: 13vh;
+    width: 180px;
+    height: 180px;
+    border: 1px solid rgba(232, 212, 173, .35);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #e8d4ad;
+    z-index: 2
+        /* define a posição dos objetos, oq fica na frente*/
+}
 
-     .hero-mark span {
-      text-align: center;
-      font-family: "Cormorant Garamond";
-      font-size: 24px;
-      line-height: .9
-    }
+.hero-mark span {
+    text-align: center;
+    font-family: "Cormorant Garamond";
+    font-size: 24px;
+    line-height: .9
+}
 
 .scroll {
-    display: flex;
-      gap: 12px;
-      margin-top: 80px;
-      right: 7px;
-      color: #d5cdc2;
+    position: absolute;
+    bottom: 32px;
+    left: 7vw;
+    color: rgba(255, 255, 255, .55);
+    font-size: 9px;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    z-index: 2
 }
+
+
+
+
+/* Organização das duas colunas */
+#desafio .split {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 8vw;
+    align-items: center;
+    width: 100%;
+}
+
+/* Título pequeno: "01 · O desafio" */
+#desafio .kicker {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 17px;
+}
+
+/* Título principal */
+#desafio h2 {
+    font-size: clamp(52px, 6vw, 82px);
+    line-height: 0.85;
+    color: var(--gold);
+    letter-spacing: -0.025em;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+}
+
+/* Parágrafo de apresentação */
+#desafio .lead {
+    font-size: 15px;
+    line-height: 1.9;
+    color: #c5bdb3;
+    max-width: 600px;
+    margin-top: 28px;
+}
+
+/* Frase em destaque */
+#desafio .quote {
+    margin-top: 28px;
+    padding-left: 20px;
+    border-left: 2px solid var(--gold);
+    font-family: "Cormorant Garamond", serif;
+    font-size: 28px;
+    line-height: 1.05;
+    color: var(--gold);
+}
+
+/* Cartão na direita */
+#desafio .story-card {
+    background: #1c1b1e;
+    border: 1px solid var(--gold);
+    border-top: 3px solid #81243e;
+    padding: 34px;
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+}
+
+/* Subtítulo do cartão */
+#desafio .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c5bdb3;
+    font-weight: 700;
+}
+
+/* Textos dentro do cartão */
+#desafio .story-card p {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #c5bdb3;
+    margin-top: 20px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 850px) {
+    #desafio.section {
+        padding: 105px 6vw 70px;
+        min-height: auto;
+    }
+
+    #desafio .split {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
 
 /* Style.css com o que eu modifiquei */
 .impacto-page {
@@ -266,7 +381,7 @@ h1 {
 }
 
 .card {
-   font-family: "Cormorant Garamond", serif;
+    font-family: "Cormorant Garamond", serif;
     background: rgba(35, 30, 33, 0.6);
     padding: 30px 40px;
     border-radius: 28px;
