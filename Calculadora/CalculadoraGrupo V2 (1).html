@@ -1,73 +1,112 @@
 <!DOCTYPE html>
+<!-- Avisa o navegador que este arquivo é uma página HTML -->
 <html lang="pt-br">
+<!-- lang="pt-br": a página está em português do Brasil -->
 
 <head>
+    <!-- O head guarda as configurações da página (não aparece na tela) -->
     <meta charset="UTF-8">
+    <!-- charset UTF-8: faz os acentos (ã, é, ç) aparecerem certinho -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- viewport: deixa a página ajustar ao tamanho da tela do celular -->
     <title>Calculadora</title>
+    <!-- title: o nome que aparece na aba do navegador -->
     <link rel="stylesheet" href="style V2 (1).css">
+    <!-- link: liga este HTML ao arquivo CSS, que cuida das cores e do visual -->
 </head>
 
 <body>
+    <!-- O body guarda tudo o que aparece na tela -->
 
+    <!-- .pagina: caixa que segura os dois cartões lado a lado (esquerda e direita) -->
     <div class="pagina">
+
+        <!-- CARTÃO DA ESQUERDA: onde a pessoa digita os dados -->
         <div class="cartao-esquerda">
-            <h1>SIMULE SEUS <i>DADOS</i></h1>
+            <h1>SIMULE QUANTO PODE ESTAR PERDENDO POR CAUSA DE <i>FUNGOS</i></h1>
+            <!-- h1 é o título principal; a tag i deixa a palavra DADOS em itálico -->
+
+            <!-- Texto que explica o problema: os fungos que destroem as uvas -->
+            <p class="texto-descricao">
+                O míldio e o oídio são fungos que destroem as uvas e derrubam a sua produção.
+                Simule quanto você perde por ano sem monitoramento e quanto pode salvar com o Sense Noir.
+            </p>
+
+            <!-- .campo: caixa que agrupa as perguntas e os inputs -->
             <div class="campo">
-                Quantas toneladas em média você produz por ano? <br>
-                <input id="ipt_tonelada"><br><br>
-                <!--ESTRUTURA DA SUB DESCRIÇAO DO QUANTO 1 TONELADA VALE EM GARRAFAS-->
-                <span id="info_igualdade" style="display: none;">
-                    <p id="op_1" class="info" style="display: none;">* 1 Tonelada = 720 garrafas(750ml)</p>
-                    <p id="op_2" class="info" style="display: none;">* 1 Tonelada = 2.880 garrafas(187ml)</p>
-                    <p id="op_3" class="info" style="display: none;">* 1 Tonelada = 1.440 garrafas(375ml)</p>
-                    <p id="op_4" class="info" style="display: none;">* 1 Tonelada = 360 garrafas(1,5L)</p>
-                    <p id="op_5" class="info" style="display: none;">* 1 Tonelada = 180 garrafas(3L)</p>
-
-
-                </span>
-
                 Você também vende vinho?
+                <!-- select: lista de opções. onchange chama a função mostrarVinho() toda vez que a escolha muda -->
                 <select id="select_vinho" onchange="mostrarVinho()">
+                    <!-- value é o que o JavaScript lê; o texto entre as tags é o que a pessoa vê -->
                     <option value="nao">Não</option>
                     <option value="sim">Sim</option>
-
                 </select> <br><br>
+                <!-- br: pula uma linha -->
 
-                <span id="spn_vinho" style="display: none;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
+                <!-- SE NÃO VENDE VINHO: aparece só a pergunta das toneladas de uva -->
+                <div id="div_uva">
+                    Quantas toneladas de uva você colhe por ano, em média? <br> <br>
+                    <!-- type="number": só deixa digitar números -->
+                    <input id="ipt_tonelada" type="number"><br>
+                </div>
 
-                        <!--ESTRUTURA DO NOVO BOTÃO DE ESCOLHER O TIPO DE VINHO-->
-                        Qual o tamanho do seu vinho?
-                        <select id="select_tipo" style="display: none;" onchange="mostrarTipo()">
-                            <option value="padrao">Padrão (750ml)</option>
-                            <option value="split">Split (187ml)</option>
-                            <option value="demi">Demi (375ml)</option>
-                            <option value="magnum">Magnum (1,5L)</option>
-                            <option value="jeroboam">Jeroboam (3L)</option>
+                <!-- SE VENDE VINHO: aparece uma linha para cada tipo de garrafa (pode usar mais de um) -->
+                <!-- style="display: none;" deixa essa parte escondida no começo -->
+                <div id="div_vinho" style="display: none;">
+                    Para cada garrafa que você produz, informe as toneladas de uva usadas e o valor médio
+                    da garrafa. Deixe em branco as que você não produz. <br><br>
 
-                        </select>
+                    <!-- Cada .linha-garrafa tem: o nome do tamanho, o input das toneladas e o input do preço -->
+                    <!-- placeholder: texto cinza de dica que some quando a pessoa digita -->
+                    <div class="linha-garrafa">
+                        <span>0,187 L (split)</span>
+                        <input id="ipt_ton_split" type="number" placeholder="Toneladas">
+                        <input id="ipt_preco_split" type="number" placeholder="R$ por garrafa">
                     </div>
-                    <br>
+                    <div class="linha-garrafa">
+                        <span>0,375 L (demi)</span>
+                        <input id="ipt_ton_demi" type="number" placeholder="Toneladas">
+                        <input id="ipt_preco_demi" type="number" placeholder="R$ por garrafa">
+                    </div>
+                    <div class="linha-garrafa">
+                        <span>0,75 L (padrão)</span>
+                        <input id="ipt_ton_padrao" type="number" placeholder="Toneladas">
+                        <input id="ipt_preco_padrao" type="number" placeholder="R$ por garrafa">
+                    </div>
+                    <div class="linha-garrafa">
+                        <span>1,5 L (magnum)</span>
+                        <input id="ipt_ton_magnum" type="number" placeholder="Toneladas">
+                        <input id="ipt_preco_magnum" type="number" placeholder="R$ por garrafa">
+                    </div>
+                    <div class="linha-garrafa">
+                        <span>3 L (jeroboam)</span>
+                        <input id="ipt_ton_jeroboam" type="number" placeholder="Toneladas">
+                        <input id="ipt_preco_jeroboam" type="number" placeholder="R$ por garrafa">
+                    </div>
 
-                    Qual o valor médio da garrafa do seu vinho? <br><br>
-                    <input id="ipt_garrafa">
-
-                </span><br><br>
+                    
+                </div>
             </div>
-            <button onclick="calcular()" class="btn-calcular">Calcular Faturamento</button>
+
+            <!-- Botão que chama a função calcular() quando é clicado -->
+            <button onclick="calcular()" class="btn-calcular">Simular perdas</button>
         </div>
 
 
+        <!-- CARTÃO DA DIREITA: onde aparecem os resultados -->
         <div class="cartao-direita">
+            <!-- Card grande (vinho escuro) com o resultado principal: a uva perdida para os fungos -->
             <div class="card-destaque">
-                <p>Quanto você está Faturando com o nosso produto</p>
-                <div id="divMsgFaturamento"></div>
+                <p>Uva destruída pelos fungos por ano sem o nosso produto</p>
+                <!-- Esta div começa vazia; o JavaScript escreve o resultado nela usando o id -->
+                <div id="divMsgToneladaPerdida"></div>
             </div>
+
             <div>
+                <!-- bloco1: primeira linha com dois cards pequenos -->
                 <div class="bloco1">
                     <div class="card-pequeno1">
-                        <p>Dinheiro que está perdendo</p>
+                        <p>Dinheiro perdido por causa dos fungos</p>
                         <div id="divMsgPercaDinheiro"></div>
                     </div>
                     <div class="card-pequeno2">
@@ -75,215 +114,193 @@
                         <div id="divMsgLucroSemProduto"></div>
                     </div>
                 </div>
+                <!-- bloco2: segunda linha com mais dois cards pequenos -->
                 <div class="bloco2">
                     <div class="card-pequeno3">
-                        <p>Toneladas perdidas sem nosso produto</p>
-                        <div id="divMsgToneladaSemProduto"></div>
+                        <p>Garrafas perdidas sem nosso produto</p>
+                        <div id="divMsgGarrafaPerdida"></div>
                     </div>
                     <div class="card-pequeno4">
-                        <p>Garrafas com nosso produto</p>
-                        <div id="divMsgGarrafaComProduto"></div>
+                        <p>Faturamento com nosso produto</p>
+                        <div id="divMsgFaturamentoComProduto"></div>
                     </div>
                 </div>
+            </div>
+
+
+
+            <!-- Botão final: a tag a é um link; o CSS faz ela parecer um botão -->
+            <div class="chamada">
+                <p>Proteja a sua safra antes que os fungos cheguem.</p>
+                <a href="cadastro.html" class="btn-contratar">Contrate o nosso produto</a>
             </div>
         </div>
     </div>
 
     <script>
-        function calcular() {
-            let input_val = ipt_tonelada.value;
-            let vende_vinho = select_vinho.value;
-            let tipo_vinho = select_tipo.value;
+        // O JavaScript lê os valores dos inputs pelo id deles, por exemplo ipt_tonelada.value
 
-            if (input_val.length === 0) {
-                alert('Informe um valor para poder fazer o cálculo');
+        // calcular(): é chamada quando a pessoa clica no botão "Simular perdas"
+        function calcular() {
+            // select_vinho.value é a opção escolhida no select: "sim" ou "nao"
+            // == compara se os dois lados são iguais
+            if (select_vinho.value == "sim") {
+                // Vende vinho: usa o cálculo por tipo de garrafa
+                calcularComVinho();
+            } else {
+                // Não vende vinho: usa o cálculo só com as toneladas de uva
+                calcularSoUva();
+            }
+        }
+
+        // calcularSoUva(): cálculo de quem NÃO vende vinho
+        function calcularSoUva() {
+            // .length === 0 significa que o campo está vazio
+            if (ipt_tonelada.value.length === 0) {
+                // alert: abre uma janelinha de aviso na tela
+                alert('Informe as toneladas de uva para poder fazer o cálculo');
+                // return: para a função aqui e não calcula nada
                 return;
             }
 
-            let toneladas = Number(input_val);
-            if (toneladas < 0) {
+            // Number(): transforma o texto do input em número, para poder fazer conta
+            let toneladas = Number(ipt_tonelada.value);
+            // <= significa "menor ou igual a"
+            if (toneladas <= 0) {
                 alert('Informe um valor válido');
                 return;
             }
-            // REFEFERÊNCIAMENTO DO VINHO EM BAIXO DO INPUT DE TONELADAS
-            if (vende_vinho == "sim") {
-                op_1.style.display = "none";
-                op_2.style.display = "none";
-                op_3.style.display = "none";
-                op_4.style.display = "none";
-                op_5.style.display = "none";
 
+            // Valor estimado de 1 tonelada de uva (a mesma estimativa que aparece na tela)
+            let preco_tonelada = 15000;
+            // Quanto a pessoa faturaria com a colheita inteira protegida (com o nosso produto)
+            let faturamento_com_produto = toneladas * preco_tonelada;
+            // Os fungos destroem em média 20% da colheita, então a perda em dinheiro é 20% do faturamento
+            let dinheiro_perdido = faturamento_com_produto * 0.20;
+            // Sem o nosso produto, o faturamento é o total menos o dinheiro perdido
+            let faturamento_sem_produto = faturamento_com_produto - dinheiro_perdido;
+            // Toneladas de uva destruídas pelos fungos (20% da colheita)
+            let tonelada_perda = toneladas * 0.20;
 
-                if (tipo_vinho == "padrao") {
-                    calculo_tonelada_uva_vinho_1();
-                    info_igualdade.style.display = "block";
-                    op_1.style.display = "block";
+            // opcoes: pede para mostrar sempre 2 casas depois da vírgula (centavos)
+            let opcoes = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
 
-                }
-                else if (tipo_vinho == "split") {
-                    calculo_tonelada_uva_vinho_2();
-                    info_igualdade.style.display = "block";
-                    op_2.style.display = "block";
+            // innerHTML: escreve dentro da div com esse id
+            // As crases ` ` permitem colocar variáveis no texto usando ${ }
+            // toLocaleString('pt-BR'): coloca ponto nos milhares e vírgula nos decimais (ex.: 4.000,50)
+            // O span com class aplica o estilo do CSS (cor e tamanho do número)
+            divMsgToneladaPerdida.innerHTML = `<span class="valor_card_destaque">${tonelada_perda.toLocaleString('pt-BR')}</span> toneladas`;
+            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${dinheiro_perdido.toLocaleString('pt-BR', opcoes)}</span>`;
+            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toLocaleString('pt-BR', opcoes)}</span>`;
+            // Quem não vende vinho não tem garrafas, então mostra só um traço
+            divMsgGarrafaPerdida.innerHTML = `<span class="valor_card">-</span>`;
+            divMsgFaturamentoComProduto.innerHTML = `R$ <span class="valor_card">${faturamento_com_produto.toLocaleString('pt-BR', opcoes)}</span>`;
+        }
 
+        // calcularComVinho(): cálculo de quem vende vinho (pode ter mais de um tipo de garrafa)
+        function calcularComVinho() {
+            // Toneladas de uva usadas em cada tipo de garrafa
+            // Se o campo estiver vazio, Number('') vira 0, então o tipo é ignorado na conta
+            let ton_split = Number(ipt_ton_split.value);
+            let ton_demi = Number(ipt_ton_demi.value);
+            let ton_padrao = Number(ipt_ton_padrao.value);
+            let ton_magnum = Number(ipt_ton_magnum.value);
+            let ton_jeroboam = Number(ipt_ton_jeroboam.value);
 
-                }
-                else if (tipo_vinho == "demi") {
-                    calculo_tonelada_uva_vinho_3();
-                    info_igualdade.style.display = "block";
-                    op_3.style.display = "block";
+            // Valor médio da garrafa de cada tipo, em reais
+            let preco_split = Number(ipt_preco_split.value);
+            let preco_demi = Number(ipt_preco_demi.value);
+            let preco_padrao = Number(ipt_preco_padrao.value);
+            let preco_magnum = Number(ipt_preco_magnum.value);
+            let preco_jeroboam = Number(ipt_preco_jeroboam.value);
 
+            // Total de toneladas = soma das toneladas de todos os tipos
+            let toneladas = ton_split + ton_demi + ton_padrao + ton_magnum + ton_jeroboam;
 
-                }
-                else if (tipo_vinho == "magnum") {
-                    calculo_tonelada_uva_vinho_4();
-                    info_igualdade.style.display = "block";
-                    op_4.style.display = "block";
-
-
-                }
-                else if (tipo_vinho == "jeroboam") {
-                    calculo_tonelada_uva_vinho_5();
-                    info_igualdade.style.display = "block";
-                    op_5.style.display = "block";
-
-
-                }
-            } else {
-                calculartoneladas();
-                info_igualdade.style.display = "none";
+            // Se a soma for 0 (ou menos), a pessoa não preencheu nenhum tipo
+            if (toneladas <= 0) {
+                alert('Informe as toneladas de uva de pelo menos um tipo de garrafa');
+                return;
             }
-        }
-        // ADIÇÃO DAS FUNCÕES CADA MODELO DE VINHO
-        function calculo_tonelada_uva_vinho_1() {
-            let toneladas = Number(ipt_tonelada.value);
-            let preco_garrafa = Number(ipt_garrafa.value);
-            let garrafas_tonelada = 720;
-            let total_garrafa = toneladas * garrafas_tonelada;
-            let percent_perda = total_garrafa * 0.20;
+
+            // Se a pessoa informou toneladas de um tipo, o valor da garrafa desse tipo é obrigatório
+            // (um if dentro do outro: só confere o preço quando existem toneladas)
+            if (ton_split > 0) {
+                if (preco_split <= 0) {
+                    alert('Informe o valor da garrafa de 0,187 L');
+                    return;
+                }
+            }
+            if (ton_demi > 0) {
+                if (preco_demi <= 0) {
+                    alert('Informe o valor da garrafa de 0,375 L');
+                    return;
+                }
+            }
+            if (ton_padrao > 0) {
+                if (preco_padrao <= 0) {
+                    alert('Informe o valor da garrafa de 0,75 L');
+                    return;
+                }
+            }
+            if (ton_magnum > 0) {
+                if (preco_magnum <= 0) {
+                    alert('Informe o valor da garrafa de 1,5 L');
+                    return;
+                }
+            }
+            if (ton_jeroboam > 0) {
+                if (preco_jeroboam <= 0) {
+                    alert('Informe o valor da garrafa de 3 L');
+                    return;
+                }
+            }
+
+            // Quantas garrafas cada tonelada de uva rende, para cada tamanho:
+            // 0,187 L = 2880 | 0,375 L = 1440 | 0,75 L = 720 | 1,5 L = 360 | 3 L = 180
+            // Garrafas de cada tipo = toneladas x garrafas por tonelada
+            let garrafas_split = ton_split * 2880;
+            let garrafas_demi = ton_demi * 1440;
+            let garrafas_padrao = ton_padrao * 720;
+            let garrafas_magnum = ton_magnum * 360;
+            let garrafas_jeroboam = ton_jeroboam * 180;
+
+            // Total de garrafas = soma das garrafas de todos os tipos
+            let total_garrafa = garrafas_split + garrafas_demi + garrafas_padrao + garrafas_magnum + garrafas_jeroboam;
+
+            // Faturamento com a safra inteira protegida = garrafas de cada tipo x preço da garrafa desse tipo, tudo somado
+            let faturamento_com_produto = garrafas_split * preco_split + garrafas_demi * preco_demi + garrafas_padrao * preco_padrao + garrafas_magnum * preco_magnum + garrafas_jeroboam * preco_jeroboam;
+
+            // Os fungos destroem em média 20%: garrafas perdidas, toneladas perdidas e dinheiro perdido
+            let garrafa_perdida = total_garrafa * 0.20;
             let tonelada_perda = toneladas * 0.20;
-            let producao_final = total_garrafa - percent_perda;
-            let faturamento_sem_produto = producao_final * preco_garrafa;
-            let faturamento_com_produto = total_garrafa * preco_garrafa;
-            let diferenca_com_sem_produto = faturamento_com_produto - faturamento_sem_produto;
+            let dinheiro_perdido = faturamento_com_produto * 0.20;
+            // Sem o nosso produto, o faturamento é o total menos o dinheiro perdido
+            let faturamento_sem_produto = faturamento_com_produto - dinheiro_perdido;
 
-            divMsgFaturamento.innerHTML = `R$ <span class="valor_card_destaque">${faturamento_com_produto.toFixed(2)}</span>`;
-            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${diferenca_com_sem_produto.toFixed(2)}</span>`;
-            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toFixed(2)}</span>`;
-            divMsgToneladaSemProduto.innerHTML = `<span class="valor_card">${tonelada_perda.toFixed(2)}</span>`;
-            divMsgGarrafaComProduto.innerHTML = `<span class="valor_card">${total_garrafa}</span>`;
+            // 2 casas depois da vírgula para os valores em reais
+            let opcoes = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+
+            // Escreve cada resultado no card correspondente (mesma lógica da função de cima)
+            divMsgToneladaPerdida.innerHTML = `<span class="valor_card_destaque">${tonelada_perda.toLocaleString('pt-BR')}</span> toneladas`;
+            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${dinheiro_perdido.toLocaleString('pt-BR', opcoes)}</span>`;
+            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toLocaleString('pt-BR', opcoes)}</span>`;
+            divMsgGarrafaPerdida.innerHTML = `<span class="valor_card">${garrafa_perdida.toLocaleString('pt-BR')}</span>`;
+            divMsgFaturamentoComProduto.innerHTML = `R$ <span class="valor_card">${faturamento_com_produto.toLocaleString('pt-BR', opcoes)}</span>`;
         }
 
-        function calculo_tonelada_uva_vinho_2() {
-            let toneladas = Number(ipt_tonelada.value);
-            let preco_garrafa = Number(ipt_garrafa.value);
-            let garrafas_tonelada = 2880;
-            let total_garrafa = toneladas * garrafas_tonelada;
-            let percent_perda = total_garrafa * 0.20;
-            let tonelada_perda = toneladas * 0.20;
-            let producao_final = total_garrafa - percent_perda;
-            let faturamento_sem_produto = producao_final * preco_garrafa;
-            let faturamento_com_produto = total_garrafa * preco_garrafa;
-            let diferenca_com_sem_produto = faturamento_com_produto - faturamento_sem_produto;
-
-            divMsgFaturamento.innerHTML = `R$ <span class="valor_card_destaque">${faturamento_com_produto.toFixed(2)}</span>`;
-            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${diferenca_com_sem_produto.toFixed(2)}</span>`;
-            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toFixed(2)}</span>`;
-            divMsgToneladaSemProduto.innerHTML = `<span class="valor_card">${tonelada_perda.toFixed(2)}</span>`;
-            divMsgGarrafaComProduto.innerHTML = `<span class="valor_card">${total_garrafa}</span>`;
-        }
-        function calculo_tonelada_uva_vinho_3() {
-            let toneladas = Number(ipt_tonelada.value);
-            let preco_garrafa = Number(ipt_garrafa.value);
-            let garrafas_tonelada = 1440;
-            let total_garrafa = toneladas * garrafas_tonelada;
-            let percent_perda = total_garrafa * 0.20;
-            let tonelada_perda = toneladas * 0.20;
-            let producao_final = total_garrafa - percent_perda;
-            let faturamento_sem_produto = producao_final * preco_garrafa;
-            let faturamento_com_produto = total_garrafa * preco_garrafa;
-            let diferenca_com_sem_produto = faturamento_com_produto - faturamento_sem_produto;
-
-            divMsgFaturamento.innerHTML = `R$ <span class="valor_card_destaque">${faturamento_com_produto.toFixed(2)}</span>`;
-            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${diferenca_com_sem_produto.toFixed(2)}</span>`;
-            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toFixed(2)}</span>`;
-            divMsgToneladaSemProduto.innerHTML = `<span class="valor_card">${tonelada_perda.toFixed(2)}</span>`;
-            divMsgGarrafaComProduto.innerHTML = `<span class="valor_card">${total_garrafa}</span>`;
-        }
-        function calculo_tonelada_uva_vinho_4() {
-            let toneladas = Number(ipt_tonelada.value);
-            let preco_garrafa = Number(ipt_garrafa.value);
-            let garrafas_tonelada = 360;
-            let total_garrafa = toneladas * garrafas_tonelada;
-            let percent_perda = total_garrafa * 0.20;
-            let tonelada_perda = toneladas * 0.20;
-            let producao_final = total_garrafa - percent_perda;
-            let faturamento_sem_produto = producao_final * preco_garrafa;
-            let faturamento_com_produto = total_garrafa * preco_garrafa;
-            let diferenca_com_sem_produto = faturamento_com_produto - faturamento_sem_produto;
-
-            divMsgFaturamento.innerHTML = `R$ <span class="valor_card_destaque">${faturamento_com_produto.toFixed(2)}</span>`;
-            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${diferenca_com_sem_produto.toFixed(2)}</span>`;
-            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toFixed(2)}</span>`;
-            divMsgToneladaSemProduto.innerHTML = `<span class="valor_card">${tonelada_perda.toFixed(2)}</span>`;
-            divMsgGarrafaComProduto.innerHTML = `<span class="valor_card">${total_garrafa}</span>`;
-        }
-        function calculo_tonelada_uva_vinho_5() {
-            let toneladas = Number(ipt_tonelada.value);
-            let preco_garrafa = Number(ipt_garrafa.value);
-            let garrafas_tonelada = 180;
-            let total_garrafa = toneladas * garrafas_tonelada;
-            let percent_perda = total_garrafa * 0.20;
-            let tonelada_perda = toneladas * 0.20;
-            let producao_final = total_garrafa - percent_perda;
-            let faturamento_sem_produto = producao_final * preco_garrafa;
-            let faturamento_com_produto = total_garrafa * preco_garrafa;
-            let diferenca_com_sem_produto = faturamento_com_produto - faturamento_sem_produto;
-
-            divMsgFaturamento.innerHTML = `R$ <span class="valor_card_destaque">${faturamento_com_produto.toFixed(2)}</span>`;
-            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${diferenca_com_sem_produto.toFixed(2)}</span>`;
-            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${faturamento_sem_produto.toFixed(2)}</span>`;
-            divMsgToneladaSemProduto.innerHTML = `<span class="valor_card">${tonelada_perda.toFixed(2)}</span>`;
-            divMsgGarrafaComProduto.innerHTML = `<span class="valor_card">${total_garrafa}</span>`;
-        }
-
-        function calculartoneladas() {
-            let toneladas = Number(ipt_tonelada.value);
-            let lucro_sem_produto = toneladas * 15000;
-            let perda_dinheiro = lucro_sem_produto * 0.20;
-            let faturamento_com_produto = lucro_sem_produto + perda_dinheiro;
-            let toneladas_perdidas = toneladas * 0.20;
-
-            divMsgFaturamento.innerHTML = `R$ <span class="valor_card_destaque">${faturamento_com_produto.toFixed(2)}</span>`;
-            divMsgPercaDinheiro.innerHTML = `R$ <span class="valor_card">${perda_dinheiro.toFixed(2)}</span>`;
-            divMsgLucroSemProduto.innerHTML = `R$ <span class="valor_card">${lucro_sem_produto.toFixed(2)}</span>`;
-            divMsgToneladaSemProduto.innerHTML = `<span class="valor_card">${toneladas_perdidas.toFixed(2)}</span>`;
-            divMsgGarrafaComProduto.innerHTML = `<span class="valor_card">-</span>`;
-        }
-
+        // mostrarVinho(): é chamada quando a pessoa troca o "Você também vende vinho?"
+        // Ela mostra uma parte da tela e esconde a outra
         function mostrarVinho() {
             if (select_vinho.value == "sim") {
-                spn_vinho.style.display = "block";
-                select_tipo.style.display = "block";
+                // style.display = "block" mostra o elemento; "none" esconde
+                div_vinho.style.display = "block";
+                div_uva.style.display = "none";
             } else {
-                spn_vinho.style.display = "none";
-                select_tipo.style.display = "none";
-
+                div_vinho.style.display = "none";
+                div_uva.style.display = "block";
             }
         }
-        function mostrarTipo() {
-            if (select_tipo.value == "padrao") {
-                spn_vinho.style.display = "block";
-            } else if (select_tipo.value == "split") {
-                spn_vinho.style.display = "block";
-            } else if (select_tipo.value == "demi") {
-                spn_vinho.style.display = "block";
-            } else if (select_tipo.value == "magnum") {
-                spn_vinho.style.display = "block";
-            } else {
-                spn_vinho.style.display = "block";
-            }
-        }
-
     </script>
 </body>
 
