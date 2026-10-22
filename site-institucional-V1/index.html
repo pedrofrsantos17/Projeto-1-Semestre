@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -14,10 +14,12 @@
 </head>
 
 <body>
+
+    <!-- ========== HEADER ========== -->
     <header class="header">
         <section>
             <a href="#inicio" class="brand">
-                <p> Sense Noir </p>
+                <p>Sense Noir</p>
                 <small>MICROCLIMA · PRECISÃO · VINHEDOS</small>
             </a>
 
@@ -33,55 +35,54 @@
                 <a class="log" href="#login">Entrar</a>
             </div>
         </section>
-
-        </div>
     </header>
 
-    <div>
-        <section class="sectionHero" id="inicio">
-            <div class="inner">
-                <div class="titulo1">Monitoramento microclimático de precisão</div>
-                <h1>Sense
-                    <br>
-                    Noir
-                </h1>
-                <p class="sub">Tecnologia preditiva para proteger a delicadeza da Pinot Noir, transformar dados do
-                    vinhedo em
-                    decisões e preservar cada safra antes que o risco se torne perda.</p>
-                <div class="hero-actions">
-                    <a class="btnprimary" href="#solucao">Conheça a solução</a>
-                    <a class="btn" href="#simulador">Simule um cenário</a>
+    <!-- ========== HERO ========== -->
+    <section class="sectionHero" id="inicio">
+        <div class="inner">
+            <div class="titulo1">Monitoramento microclimático de precisão</div>
+            <h1>Sense<br>Noir</h1>
+            <p class="sub">Tecnologia preditiva para proteger a delicadeza da Pinot Noir, transformar dados do
+                vinhedo em decisões e preservar cada safra antes que o risco se torne perda.</p>
+            <div class="hero-actions">
+                <a class="btnprimary" href="#solucao">Conheça a solução</a>
+                <a class="btn" href="#simulador">Simule um cenário</a>
+            </div>
+        </div>
+        <div class="hero-mark"><span>vinhedos<br>& dados<br>em harmonia</span></div>
+        <div class="scroll">role para explorar ↓</div>
+    </section>
+
+    <!-- ========== 01 · DESAFIO ========== -->
+    <section class="section" id="desafio">
+        <div class="split">
+            <div>
+                <div class="kicker">01 · O desafio</div>
+                <h2>A ciência da precisão a serviço dos vinhedos.</h2>
+                <p class="lead" style="margin-top:28px">A Pinot Noir é uma das variedades mais sensíveis do vinhedo.
+                    Pequenas alterações de temperatura, umidade e chuva podem mudar o equilíbrio da planta e abrir
+                    espaço para doenças.</p>
+                <div class="quote">“Cada parcela tem um microclima. O problema é tomar decisões com dados que chegam
+                    tarde demais.”</div>
+            </div>
+
+            <div class="story-card">
+                <div class="eyebrow">Por que isso importa?</div>
+                <p>O produtor precisa enxergar o risco enquanto ele ainda pode ser administrado. Em vez de depender
+                    apenas de observação e previsões genéricas, o Sense Noir acompanha as condições reais do cultivo.
+                </p>
+                <p>O resultado é uma operação mais preventiva: identificar sinais, priorizar áreas críticas e agir
+                    antes que uma condição favorável a doenças evolua para uma perda.</p>
+                <div
+                    style="margin-top:25px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between">
+                    <span class="eyebrow">Foco</span>
+                    <strong style="color:var(--gold)">Pinot Noir</strong>
                 </div>
             </div>
-            <div class="hero-mark"><span>vinhedos<br>& dados<br>em harmonia</span></div>
-            <div class="scroll">role para explorar ↓</div>
-        </section>
-
-    </div>
-
-    <section class="section" id="desafio">
-    <div class="split">
-      <div>
-        <div class="kicker">01 · O desafio</div>
-        <h2>A ciência da precisão a serviço dos vinhedos.</h2>
-        <p class="lead" style="margin-top:28px">A Pinot Noir é uma das variedades mais sensíveis do vinhedo. Pequenas
-          alterações de temperatura, umidade e chuva podem mudar o equilíbrio da planta e abrir espaço para doenças.</p>
-        <div class="quote">“Cada parcela tem um microclima. O problema é tomar decisões com dados que chegam tarde
-          demais.”</div>
-      </div>
-      <div class="story-card">
-        <div class="eyebrow">Por que isso importa?</div>
-        <p>O produtor precisa enxergar o risco enquanto ele ainda pode ser administrado. Em vez de depender apenas de
-          observação e previsões genéricas, o Sense Noir acompanha as condições reais do cultivo.</p>
-        <p>O resultado é uma operação mais preventiva: identificar sinais, priorizar áreas críticas e agir antes que uma
-          condição favorável a doenças evolua para uma perda.</p>
-        <div
-          style="margin-top:25px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between">
-          <span class="eyebrow">Foco</span><strong style="color:var(--gold)">Pinot Noir</strong>
         </div>
-      </div>
-    </div>
     </section>
+
+    <!-- ========== 02 · FRAGILIDADE ========== -->
     <section class="back-fragil">
         <div class="container-fragil">
             <div class="titulo">02 · A FRAGILIDADE</div>
@@ -91,7 +92,8 @@
                 <div class="bloco">
                     <div class="bloco-tit">01 / TEMPERATURA</div>
                     <h3>Estresse térmico</h3>
-                    <p>Oscilações fora da faixa adequada podem comprometer o desenvolvimento e a maturação das uvas.</p>
+                    <p>Oscilações fora da faixa adequada podem comprometer o desenvolvimento e a maturação das uvas.
+                    </p>
                 </div>
                 <div class="bloco">
                     <div class="bloco-tit">02 / UMIDADE</div>
@@ -108,6 +110,8 @@
             </div>
         </div>
     </section>
+
+    <!-- ========== 03 · SOLUÇÃO ========== -->
     <section class="solucao" id="solucao">
         <div class="container">
 
@@ -123,6 +127,7 @@
                     <img src="proto_dashboard_site.png" alt="Painel de monitoramento do vinhedo">
                 </div>
             </div>
+
             <div class="etapas">
                 <div class="etapa">
                     <div class="etapa-num">01</div>
@@ -148,5 +153,34 @@
 
         </div>
     </section>
-    </body>
-    </html>
+
+    <!-- ========== 04 · IMPACTO (a fazer) ========== -->
+    <!-- <section id="impacto"> ... </section> -->
+
+    <!-- ========== 05 · SIMULADOR (a fazer) ========== -->
+    <!-- <section id="simulador"> ... </section> -->
+
+    <!-- ========== 06 · CONTATO ========== -->
+    <section class="contato" id="contato">
+        <div class="container-contato">
+            <div class="titulo-contato">06 · PRÓXIMO PASSO</div>
+            <h2>Leve o monitoramento<br>para o seu vinhedo.</h2>
+            <p class="texto-contato">Converse com a equipe Sense Noir e descubra como estruturar um monitoramento
+                orientado ao seu cultivo.</p>
+
+            <div class="form-contato">
+                <input type="text" placeholder="Nome">
+                <input type="email" placeholder="E-mail">
+                <input type="text" placeholder="Vinícola / propriedade">
+                <input type="tel" placeholder="Telefone">
+                <textarea font-family="font-family: 'Manrope', sans-serif;" placeholder="Nos conte brevemente sobre seu vinhedo..." ></textarea>
+                <button class="btn-enviar">Enviar mensagem</button>
+            </div>
+
+            <div class="rodape-contato">SENSE NOIR · MONITORAMENTO MICROCLIMÁTICO · PROTÓTIPO ACADÊMICO</div>
+        </div>
+    </section>
+
+</body>
+
+</html>

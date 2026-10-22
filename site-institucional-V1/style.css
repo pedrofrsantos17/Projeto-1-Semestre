@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
 }
 
 :root {
@@ -16,20 +15,32 @@
     --line: #d9d1c7;
     --green: #536b58;
     --shadow: 0 24px 70px rgba(44, 18, 20, .12);
+
     --gold-f: #C99E63;
     --wine-f: #6B1426;
     --card-f: #1C1B1E;
-    --line-f: rgba(201,158,99,.35);
+    --line-f: rgba(201, 158, 99, .35);
     --cream-f: #F3E9DC;
 }
-
 
 body {
     background-color: #111113;
     font-family: 'Manrope', sans-serif;
 }
+h1,
+h2,
+h3 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 500;
+}
 
-/* Configurações gerais das seções */
+h1 {
+    font-size: clamp(65px, 9vw, 132px);
+    line-height: .78;
+    color: #d5cdc2;
+    letter-spacing: -.03em;
+}
+
 .section {
     min-height: 100vh;
     padding: 120px 7vw 80px;
@@ -39,16 +50,14 @@ body {
 }
 
 
+/* HEADER*/
 .header {
-    /* Aqui é para garantir que o reader fique estatico */
-    position: fixed;
+    position: fixed; /* mantém o header estático */
     top: 0;
     left: 0;
     right: 0;
     z-index: 99;
-    /* define posição quanto aos outros elementos*/
     border-bottom: 1px solid #594A37;
-
 }
 
 .header section {
@@ -63,7 +72,10 @@ body {
 .header a {
     text-decoration: none;
     color: #d5cdc2;
+}
 
+.header a:hover {
+    color: #C6A56B;
 }
 
 .header p {
@@ -80,23 +92,14 @@ body {
     font-weight: bold;
     letter-spacing: 0.1rem;
     color: #C6A56B;
-
-}
-
-.header a:hover {
-    color: #C6A56B;
 }
 
 .nav {
     display: flex;
     gap: 24px;
-    top: 0;
-    left: 0;
-    right: 0;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-
 }
 
 .nav-acesso a {
@@ -105,26 +108,30 @@ body {
     text-decoration: none;
 }
 
-
 .nav-acesso .cad {
     background-color: #306044;
-    font-weight: bold;
     font-size: 10px;
-    text-transform: uppercase;
     font-weight: 700;
-
+    text-transform: uppercase;
 }
 
 .nav-acesso .log {
     background-color: transparent;
-    font-weight: bold;
+    border: 1px solid #C6A56B;
     font-size: 10px;
-    border-color: #C6A56B;
-    border-style: solid;
-    border-width: 1px;
-    text-transform: uppercase;
     font-weight: 700;
+    text-transform: uppercase;
+}
 
+
+/*HERO*/
+.sectionHero {
+    background-image: url("Fundo_Pinot_Noir.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 120px;
+    min-height: 100vh;
 }
 
 .inner {
@@ -135,58 +142,31 @@ body {
     padding-top: 80px;
 }
 
-.sectionHero {
-    background-image: url("Fundo_Pinot_Noir.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding-top: 120px;
-    min-height: 100vh;
-}
-
 .titulo1 {
     font-size: 10px;
     letter-spacing: .28em;
     text-transform: uppercase;
     color: #C6A56B;
     font-weight: 700;
-    margin-bottom: 17px
+    margin-bottom: 17px;
 }
 
 .sub {
-      margin-top: 28px;
-      color: rgba(255, 248, 238, .78);
-      font-size: 14px;
-      line-height: 1.8;
-      max-width: 590px
-    }
-
-h1,
-h2,
-h3 {
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 500
+    margin-top: 28px;
+    color: rgba(255, 248, 238, .78);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 590px;
 }
 
-h1 {
-    font-family: "Cormorant Garamond", serif;
-    font-size: clamp(65px, 9vw, 132px);
-    line-height: .78;
-    color: #d5cdc2;
-    letter-spacing: -.03em;
-    font-weight: 500;
-
-}
-
-
-/* classe que controla a posição dos botões da hero.actions*/
+/* posição dos botões do hero */
 .hero-actions {
     display: flex;
     gap: 12px;
-    margin-top: 36px
+    margin-top: 36px;
 }
 
-/* configuração do botão conheça a soluçãp*/
+/* botão "Conheça a solução" */
 .btnprimary {
     padding: 10px 20px;
     border-radius: 999px;
@@ -198,43 +178,38 @@ h1 {
     color: #d5cdc2;
 }
 
-/* configuração do botão simule um cenario*/
+/* botão "Simule um cenário" */
 .btn {
     padding: 10px 20px;
     border-radius: 999px;
     background-color: transparent;
+    border: 1px solid #C6A56B;
     font-weight: bold;
     font-size: 12px;
-    border-color: #C6A56B;
-    border-style: solid;
-    border-width: 1px;
     color: #d5cdc2;
 }
 
-/* marca no canto direito da primeira tela*/
+/* marca circular no canto direito */
 .hero-mark {
-    background: rgba(22, 43, 29, .55);
-    border-color: #5e8c6a;
-    color: #b89a63;
     position: absolute;
     right: 7vw;
     bottom: 13vh;
     width: 180px;
     height: 180px;
-    border: 1px solid rgba(232, 212, 173, .35);
-    border-radius: 50%;
     display: grid;
     place-items: center;
+    background: rgba(22, 43, 29, .55);
+    border: 1px solid rgba(232, 212, 173, .35);
+    border-radius: 50%;
     color: #e8d4ad;
-    z-index: 2
-        /* define a posição dos objetos, oq fica na frente*/
+    z-index: 2;
 }
 
 .hero-mark span {
     text-align: center;
     font-family: "Cormorant Garamond";
     font-size: 24px;
-    line-height: .9
+    line-height: .9;
 }
 
 .scroll {
@@ -245,13 +220,12 @@ h1 {
     font-size: 9px;
     letter-spacing: .25em;
     text-transform: uppercase;
-    z-index: 2
+    z-index: 2;
 }
 
 
+/*01 · DESAFIO*/
 
-
-/* Organização das duas colunas */
 #desafio .split {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
@@ -260,7 +234,7 @@ h1 {
     width: 100%;
 }
 
-/* Título pequeno: "01 · O desafio" */
+/* título pequeno: "01 · O desafio" */
 #desafio .kicker {
     font-size: 10px;
     letter-spacing: 0.28em;
@@ -270,17 +244,15 @@ h1 {
     margin-bottom: 17px;
 }
 
-/* Título principal */
 #desafio h2 {
+    font-family: "Cormorant Garamond", serif;
     font-size: clamp(52px, 6vw, 82px);
     line-height: 0.85;
     color: var(--gold);
     letter-spacing: -0.025em;
-    font-family: "Cormorant Garamond", serif;
     font-weight: 500;
 }
 
-/* Parágrafo de apresentação */
 #desafio .lead {
     font-size: 15px;
     line-height: 1.9;
@@ -289,7 +261,6 @@ h1 {
     margin-top: 28px;
 }
 
-/* Frase em destaque */
 #desafio .quote {
     margin-top: 28px;
     padding-left: 20px;
@@ -300,7 +271,7 @@ h1 {
     color: var(--gold);
 }
 
-/* Cartão na direita */
+/* cartão da direita */
 #desafio .story-card {
     background: #1c1b1e;
     border: 1px solid var(--gold);
@@ -310,7 +281,6 @@ h1 {
     box-shadow: var(--shadow);
 }
 
-/* Subtítulo do cartão */
 #desafio .eyebrow {
     font-size: 11px;
     letter-spacing: 0.18em;
@@ -319,7 +289,6 @@ h1 {
     font-weight: 700;
 }
 
-/* Textos dentro do cartão */
 #desafio .story-card p {
     font-size: 13px;
     line-height: 1.9;
@@ -327,23 +296,178 @@ h1 {
     margin-top: 20px;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 850px) {
-    #desafio.section {
-        padding: 105px 6vw 70px;
-        min-height: auto;
-    }
 
-    #desafio .split {
-        grid-template-columns: 1fr;
-    }
+/*02 · FRAGILIDADE*/
+.back-fragil {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #15241D;
+    padding: 80px 24px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.container-fragil {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+/* rótulo acima do título */
+.titulo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold-f);
+}
+
+.back-fragil h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 7vw, 92px);
+    line-height: .95;
+    color: var(--gold-f);
+    margin: 14px 0 0;
+}
+
+/* grade de 3 colunas */
+.blocos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 46px;
+}
+
+.bloco {
+    padding: 27px;
+    min-height: 190px;
+    background: var(--card-f);
+    border: 1px solid var(--line-f);
+    border-radius: 22px;
+    box-shadow: 0 3px 0 var(--wine-f); /* linha vinho na base */
+}
+
+.bloco-tit {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold-f);
+}
+
+.bloco h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 30px;
+    color: var(--gold-f);
+    margin: 28px 0 10px;
+}
+
+.bloco p {
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .65);
+    margin: 0;
 }
 
 
+/* 03 · SOLUÇÃO*/
+
+.solucao {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 80px 24px;
+    background: #11301F;
+    font-family: 'Manrope', sans-serif;
+}
+
+.solucao .container {
+    width: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+}
+
+.solucao .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    color: var(--gold-f);
+}
+
+/* texto à esquerda, painel à direita */
+.topo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.solucao h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 6.5vw, 88px);
+    line-height: .95;
+    color: var(--cream-f);
+    margin: 14px 0 28px;
+}
+
+.texto p {
+    max-width: 580px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, .7);
+    margin: 0;
+}
+
+.painel img {
+    width: 100%;
+    display: block;
+    border-radius: 28px;
+}
+
+/* grade dos 4 cards */
+.etapas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 46px;
+}
+
+.etapa {
+    padding: 28px 24px;
+    background: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 22px;
+    box-shadow: 0 2px 0 var(--wine-f);
+}
+
+.etapa-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--gold-f);
+}
+
+.etapa h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 28px;
+    color: var(--cream-f);
+    margin: 22px 0 8px;
+}
+
+.etapa p {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, .65);
+    margin: 0;
+}
 
 
-
-/* Style.css com o que eu modifiquei */
+/* 04 · IMPACTO  (ainda sem HTML correspondente)*/
+   
 .impacto-page {
     padding: 120px 6vw 80px;
     color: #d5cdc2;
@@ -386,7 +510,7 @@ h1 {
 }
 
 .card {
-    font-family: "Cormorant Garamond", serif;
+    font-family: 'Manrope', sans-serif;
     background: rgba(35, 30, 33, 0.6);
     padding: 30px 40px;
     border-radius: 28px;
@@ -414,7 +538,120 @@ h1 {
     line-height: 1.7;
 }
 
-/* Responsividade  */
+
+/*05 · SIMULADOR  (a fazer)*/
+
+
+/*06 · CONTATO*/
+.contato {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 7vw 80px;
+    background: linear-gradient(140deg, #171216, #31121d);
+    font-family: 'Manrope', sans-serif;
+}
+
+.container-contato {
+    width: 100%;
+    max-width: 1050px;
+}
+
+.titulo-contato {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold-f);
+    margin-bottom: 17px;
+}
+
+.contato h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 6vw, 82px);
+    line-height: .95;
+    letter-spacing: -.025em;
+    color: var(--cream-f);
+}
+
+.texto-contato {
+    font-family: 'Manrope', sans-serif;
+    max-width: 600px;
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, .65);
+}
+
+/* formulário em 2 colunas */
+.form-contato {
+    font-family: 'Manrope', sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.form-contato input,
+.form-contato textarea {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 14px;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+}
+
+.form-contato input::placeholder,
+.form-contato textarea::placeholder {
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    color: rgba(255, 255, 255, .42);
+}
+
+/* mensagem ocupa a linha inteira */
+.form-contato textarea {
+    grid-column: 1 / -1;
+    min-height: 130px;
+    resize: vertical;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+}
+
+.btn-enviar {
+    width: max-content;
+    padding: 14px 22px;
+    background-color: #306044;
+    border: 1px solid #5e8c6a;
+    border-radius: 999px;
+    color: #d5cdc2;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.rodape-contato {
+    margin-top: 70px;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .35);
+}
+
+.teste {
+
+    font-family: 'Cormorand', sans-serif;
+}
+
+
+/*RESPONSIVIDADE*/
+
 @media (max-width: 900px) {
     .cards-grid {
         grid-template-columns: 1fr;
@@ -425,185 +662,22 @@ h1 {
     }
 }
 
-/* Coisas que eu modifiquei */
+@media (max-width: 850px) {
+    #desafio.section {
+        padding: 105px 6vw 70px;
+        min-height: auto;
+    }
 
-/*Fragilidade*/
+    #desafio .split {
+        grid-template-columns: 1fr;
+    }
 
-/* Section tela cheia */
-.back-fragil{
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    background: #15241D;
-    padding: 80px 24px;
-    font-family: 'Manrope', sans-serif;
-}
+    .contato {
+        min-height: auto;
+        padding: 105px 6vw 70px;
+    }
 
-/* Centraliza */
-.container-fragil{
-    width: 100%;
-    max-width: 1360px;
-    margin: 0 auto;
-}
-
-/* Rótulo acima do título */
-.titulo{
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--gold-f);
-}
-
-/* Título principal */
-.back-fragil h2{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: clamp(48px, 7vw, 92px);
-    line-height: .95;
-    color: var(--gold-f);
-    margin: 14px 0 0;
-}
-
-/* Grade com 3 colunas */
-.blocos{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 18px;
-    margin-top: 46px;
-}
-
-.bloco{
-    padding: 27px;
-    min-height: 190px;
-    background: var(--card-f);
-    border: 1px solid var(--line-f);
-    border-radius: 22px;
-    box-shadow: 0 3px 0 var(--wine-f); /* linha vinho na base */
-}
-
-/* Rótulo do card */
-.bloco-tit{
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--gold-f);
-}
-
-/* Título do card */
-.bloco h3{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 30px;
-    color: var(--gold-f);
-    margin: 28px 0 10px;
-}
-
-/* Texto do card */
-.bloco p{
-    font-size: 12px;
-    line-height: 1.5;
-    color: rgba(255,255,255,.65);
-    margin: 0;
-}
-
-/* Solucao */
-
-/* Section tela cheia */
-.solucao{
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 80px 24px;
-    background: #11301F;
-    font-family: 'Manrope', sans-serif;
-}
-
-/* Centraliza */
-.solucao .container{
-    width: 100%;
-    max-width: 1360px;
-    margin: 0 auto;
-}
-
-/* Rótulo acima do título */
-.solucao .eyebrow{
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .22em;
-    color: var(--gold-f);
-}
-
-/* Texto à esquerda, painel à direita */
-.topo{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    align-items: center;
-}
-
-/* Título */
-.solucao h2{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: clamp(48px, 6.5vw, 88px);
-    line-height: .95;
-    color: var(--cream-f);
-    margin: 14px 0 28px;
-}
-
-/* Parágrafo */
-.texto p{
-    max-width: 580px;
-    font-size: 16px;
-    line-height: 1.8;
-    color: rgba(255,255,255,.7);
-    margin: 0;
-}
-
-/* Imagem do painel */
-.painel img{
-    width: 100%;
-    display: block;
-    border-radius: 28px;
-}
-
-/* Grade dos 4 cards */
-.etapas{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
-    margin-top: 46px;
-}
-
-/* Card */
-.etapa{
-    padding: 28px 24px;
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.14);
-    border-radius: 22px;
-    box-shadow: 0 2px 0 var(--wine-f);
-}
-
-.etapa-num{
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    color: var(--gold-f);
-}
-
-.etapa h3{
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400;
-    font-size: 28px;
-    color: var(--cream-f);
-    margin: 22px 0 8px;
-}
-
-.etapa p{
-    font-size: 12px;
-    line-height: 1.6;
-    color: rgba(255,255,255,.65);
-    margin: 0;
+    .form-contato {
+        grid-template-columns: 1fr;
+    }
 }
