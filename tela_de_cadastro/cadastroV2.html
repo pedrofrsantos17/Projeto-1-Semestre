@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <div class="card" id="div_cadastro">
+        <h2>Cadastro</h2>
+
+        <div class="campo">
+            <span class="icone">👤</span>
+            <input type="text" id="ipt_nome_usuario" placeholder="Nome de usuário">
+        </div>
+
+        <div class="campo">
+            <span class="icone">✉️</span>
+            <input type="text" id="ipt_email" placeholder="Email">
+        </div>
+
+        <div class="campo">
+            <span class="icone">🔒</span>
+            <input type="password" id="ipt_senha" placeholder="Senha">
+        </div>
+
+        <button onclick="AGA()">Cadastrar</button>
+    </div>
+
+    <div class="card" id="div_opcoes" style="display: none;">
+        <h2>Empresa</h2>
+        <span style="color: #F3EBD3;">Agora, associe-se a uma empresa</span>
+        <button onclick="MostrarEntrar()">Entrar em uma empresa</button>
+        <button onclick="MostrarCriar()">Criar uma empresa</button>
+    </div>
+
+    <div class="card" id="div_entrar" style="display: none;">
+        <h2>Entrar</h2>
+
+        <div class="campo">
+            <span class="icone">🏢</span>
+            <input type="text" id="ipt_codigo_cadastro" placeholder="Código de cadastro da empresa">
+        </div>
+
+        <div class="campo">
+            <span class="icone">✉️</span>
+            <input type="text" id="ipt_email_empresarial" placeholder="Email empresarial">
+        </div>
+
+        <button onclick="EntrarEmpresa()">Entrar</button>
+    </div>
+
+    <div class="card" id="div_criar" style="display: none;">
+        <h2>Criar</h2>
+
+        <div class="campo">
+            <span class="icone">🏢</span>
+            <input type="text" id="ipt_nome_empresa" placeholder="Nome da empresa">
+        </div>
+
+        <div class="campo">
+            <span class="icone">📄</span>
+            <input type="text" id="ipt_cnpj_empresa" placeholder="CNPJ da empresa">
+        </div>
+
+        <div class="campo">
+            <span class="icone">✉️</span>
+            <input type="text" id="ipt_email_base" placeholder="Base do email (ex: valeverdevinhos.com)">
+        </div>
+
+        <button onclick="CriarEmpresa()">Criar empresa</button>
+    </div>
+
+    <div class="card" id="div_exibir" style="display: none;">
+        <h2>Pronto!</h2>
+        <span id="exibir" style="color: #F3EBD3;"></span>
+    </div>
+
+</body>
+<script>
+
+    let usuario = [];
+    let atual = -1;
+
+    
+    // Empresa simulada para demonstração
+    let empresa = [
+        {
+            nome_empresa: "Vale Verde Vinhos",
+            cnpj_empresa: "12.345.678/0001-90",
+            email_base: "valeverdevinhos.com",
+            codigo_cadastro: "EMP-2027-01"
+        }
+    ];
+
+    function AGA() {
+        let nome_usuario = ipt_nome_usuario.value;
+        let email = ipt_email.value;
+        let senha = ipt_senha.value;
+        let existe = false;
+
+        if (nome_usuario == "" || email == "" || senha == "") {
+            alert(`Preencha nome, email e senha`)
+        }
+        else {
+            for (let i = 0; i < usuario.length; i++) {
+                if (usuario[i].email == email) {
+                    existe = true;
+                }
+            }
+
+            if (existe) {
+                alert(`Esse email já está cadastrado`)
+            }
+            else {
+                usuario.push({
+                    nome_usuario: nome_usuario,
+                    email: email,
+                    senha: senha,
+                    empresa: ""
+                });
+
+                atual = usuario.length - 1;
+
+                div_cadastro.style.display = "none";
+                div_opcoes.style.display = "flex";
+            }
+        }
+    }
+
+    function MostrarEntrar() {
+        div_opcoes.style.display = "none";
+        div_entrar.style.display = "flex";
+        div_criar.style.display = "none";
+    }
+
+    function MostrarCriar() {
+        div_opcoes.style.display = "none";
+        div_criar.style.display = "flex";
+        div_entrar.style.display = "none";
+    }
+
+    function EntrarEmpresa() {
+        let codigo_cadastro = ipt_codigo_cadastro.value;
+        let email_empresarial = ipt_email_empresarial.value;
+        let achou = null;
+
+        if (codigo_cadastro == "" || email_empresarial == "") {
+            alert(`Preencha o código da empresa e o email empresarial`)
+        }
+        else {
+            for (let i = 0; i < empresa.length; i++) {
+                if (empresa[i].codigo_cadastro == codigo_cadastro) {
+                    achou = empresa[i];
+                }
+            }
+
+            if (achou == null) {
+                alert(`Código de cadastro da empresa não encontrado`)
+            }
+            else if (!email_empresarial.includes("@" + achou.email_base)) {
+                alert(`Esse email não pertence à empresa ${achou.nome_empresa}`)
+            }
+            else {
+                usuario[atual].empresa = achou.nome_empresa;
+
+                div_entrar.style.display = "none";
+                div_exibir.style.display = "flex";
+                exibir.innerHTML = `${usuario[atual].nome_usuario} agora faz parte da empresa ${achou.nome_empresa}!`;
+            }
+        }
+    }
+
+    function CriarEmpresa() {
+        let nome_empresa = ipt_nome_empresa.value;
+        let cnpj_empresa = ipt_cnpj_empresa.value;
+        let email_base = ipt_email_base.value;
+        let existe = false;
+        let numero = empresa.length + 1;
+
+        if (nome_empresa == "" || cnpj_empresa == "" || email_base == "") {
+            alert(`Preencha nome, CNPJ e a base do email da empresa`)
+        }
+        else {
+            for (let i = 0; i < empresa.length; i++) {
+                if (empresa[i].cnpj_empresa == cnpj_empresa) {
+                    existe = true;
+                }
+            }
+
+            if (existe) {
+                alert(`Esse CNPJ já está cadastrado`)
+            }
+            else {
+                if (numero < 10) {
+                    numero = "0" + numero;
+                }
+
+                let codigo_cadastro = `EMP-2027-${numero}`;
+
+                empresa.push({
+                    nome_empresa: nome_empresa,
+                    cnpj_empresa: cnpj_empresa,
+                    email_base: email_base,
+                    codigo_cadastro: codigo_cadastro
+                });
+
+                usuario[atual].empresa = nome_empresa;
+
+                div_criar.style.display = "none";
+                div_exibir.style.display = "flex";
+                exibir.innerHTML = `Empresa ${nome_empresa} criada!<br>`;
+                exibir.innerHTML = exibir.innerHTML + `Código para os funcionários e clientes entrarem: <b>${codigo_cadastro}</b>`;
+            }
+        }
+    }
+
+</script>
+
+</html>
