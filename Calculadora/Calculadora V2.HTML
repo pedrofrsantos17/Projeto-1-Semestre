@@ -3,7 +3,7 @@
 <html lang="pt-br">
 <!-- lang="pt-br": a página está em português do Brasil -->
 
-<head>
+    <head>
     <!-- O head guarda as configurações da página (não aparece na tela) -->
     <meta charset="UTF-8">
     <!-- charset UTF-8: faz os acentos (ã, é, ç) aparecerem certinho -->
@@ -12,7 +12,7 @@
     <title>Calculadora</title>
     <!-- title: o nome que aparece na aba do navegador -->
     <link rel="stylesheet" href="style V2 (1).css">
-    <!-- link: liga este HTML ao arquivo CSS, que cuida das cores e do visual -->
+   
 </head>
 
 <body>
@@ -86,10 +86,14 @@
 
                     
                 </div>
-            </div>
+        </div>
 
             <!-- Botão que chama a função calcular() quando é clicado -->
             <button onclick="calcular()" class="btn-calcular">Simular perdas</button>
+            <br>
+            <br>
+            <h4>Fontes dos valores:Grupo MarkWide Research, Agência governamental australiana CSIRO, 
+            </h4>
         </div>
 
 
@@ -99,7 +103,7 @@
             <div class="card-destaque">
                 <p>Uva destruída pelos fungos por ano sem o nosso produto</p>
                 <!-- Esta div começa vazia; o JavaScript escreve o resultado nela usando o id -->
-                <div id="divMsgToneladaPerdida"></div>
+                <div id="divMsgToneladaPerdida" class="resultado"></div>
             </div>
 
             <div>
@@ -107,22 +111,22 @@
                 <div class="bloco1">
                     <div class="card-pequeno1">
                         <p>Dinheiro perdido por causa dos fungos</p>
-                        <div id="divMsgPercaDinheiro"></div>
+                        <div id="divMsgPercaDinheiro" class="resultado"></div>
                     </div>
                     <div class="card-pequeno2">
                         <p>Faturamento sem nosso produto</p>
-                        <div id="divMsgLucroSemProduto"></div>
+                        <div id="divMsgLucroSemProduto" class="resultado"></div>
                     </div>
                 </div>
                 <!-- bloco2: segunda linha com mais dois cards pequenos -->
                 <div class="bloco2">
                     <div class="card-pequeno3">
                         <p>Garrafas perdidas sem nosso produto</p>
-                        <div id="divMsgGarrafaPerdida"></div>
+                        <div id="divMsgGarrafaPerdida" class="resultado"></div>
                     </div>
                     <div class="card-pequeno4">
                         <p>Faturamento com nosso produto</p>
-                        <div id="divMsgFaturamentoComProduto"></div>
+                        <div id="divMsgFaturamentoComProduto" class="resultado"></div>
                     </div>
                 </div>
             </div>
@@ -144,6 +148,8 @@
         function calcular() {
             // select_vinho.value é a opção escolhida no select: "sim" ou "nao"
             // == compara se os dois lados são iguais
+            // Antes de calcular, torna visíveis os campos de resultado
+            mostrarResultados();
             if (select_vinho.value == "sim") {
                 // Vende vinho: usa o cálculo por tipo de garrafa
                 calcularComVinho();
@@ -151,6 +157,12 @@
                 // Não vende vinho: usa o cálculo só com as toneladas de uva
                 calcularSoUva();
             }
+        }
+
+        // ativa a exibição dos blocos de resultado no cartão da direita
+        function mostrarResultados() {
+            const cartaoDireita = document.querySelector('.cartao-direita');
+            if (cartaoDireita) cartaoDireita.classList.add('resultados-visiveis');
         }
 
         // calcularSoUva(): cálculo de quem NÃO vende vinho

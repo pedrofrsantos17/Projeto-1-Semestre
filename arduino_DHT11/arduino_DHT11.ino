@@ -1,4 +1,3 @@
-#include "DHT.h"
 
 #define TIPO_SENSOR DHT11
 

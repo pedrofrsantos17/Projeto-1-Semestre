@@ -186,14 +186,14 @@ select option {
 /* a div onde o JavaScript escreve o resultado do card grande */
 #divMsgToneladaPerdida {
     font-weight: bold; /* negrito */
-    text-align: center; /* centralizado */
+    text-align: left; /* centralizado */
     margin-top: 30px; /* espaço em cima */
     font-size: 32px; /* tamanho da letra */
 }
 
 /* as divs onde o JavaScript escreve o resultado dos cards pequenos */
 #divMsgPercaDinheiro, #divMsgLucroSemProduto, #divMsgGarrafaPerdida, #divMsgFaturamentoComProduto {
-    text-align: center; /* centralizado */
+    text-align: left; /* centralizado */
     margin-top: 30px; /* espaço em cima */
     font-size: 16px; /* tamanho da letra */
 }
@@ -232,6 +232,48 @@ select option {
     border-radius: 18px; /* cantos bem arredondados */
 }
 
+/*     Classes criadas para possibiitar a invisibilidade das divs        */
+
+ /* Esconde resultados por padrão: blocos, cards pequenos e card-destaque não devem aparecer */
+        /* Usamos visibility + height/opacity para preservar layout e permitir transição suave */
+        .bloco1, .bloco2, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4, .card-destaque, .chamada {
+            visibility: hidden !important;
+            opacity: 0 !important;
+            transform: translateY(4px); /* animação mais sutil */
+            transition: visibility 0s linear 0.12s, opacity 0.12s ease, transform 0.12s ease; /* duração reduzida */
+            /* garante espaço para que o texto fique posicionado antes de aparecer */
+            min-height: 64px; /* mantém blocos quadrados/consistentes */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Quando a classe .resultados-visiveis estiver no container, mostra os elementos */
+        .cartao-direita.resultados-visiveis .bloco1,
+        .cartao-direita.resultados-visiveis .bloco2,
+        .cartao-direita.resultados-visiveis .card-pequeno1,
+        .cartao-direita.resultados-visiveis .card-pequeno2,
+        .cartao-direita.resultados-visiveis .card-pequeno3,
+        .cartao-direita.resultados-visiveis .card-pequeno4,
+        .cartao-direita.resultados-visiveis .card-destaque,
+        .cartao-direita.resultados-visiveis .chamada {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            transition-delay: 0s;
+        }
+
+        /* Especifica alinhamento interno dos textos para manter posição previsível */
+        .card-destaque, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: left;
+            padding: 12px;
+            box-sizing: border-box;
+            /* Força proporção quadrada visual nos cards pequenos via aspect-ratio (fallback to min-height) */
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+
 /* @media: estas regras só valem em telas com até 720px de largura (celular) */
 @media (max-width: 720px) {
     .pagina {
@@ -243,3 +285,4 @@ select option {
         width: 100%; /* cada cartão ocupa a largura toda */
     }
 }
+        }

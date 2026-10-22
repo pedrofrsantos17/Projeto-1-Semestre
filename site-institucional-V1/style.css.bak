@@ -1,0 +1,45 @@
+/* Backup of style.css before fine adjustments */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700;900&display=swap');
+
+:root{
+  --bg:#0f0f10;
+  --panel:#191718;
+  --muted:#bdb6ad;
+  --accent:#caa86a; /* gold */
+  --accent-2:#6b2130; /* bordô */
+  --outline: rgba(202,168,106,0.14);
+  --radius:28px;
+  --container-max:1300px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--muted);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+img,svg{max-width:100%;height:auto;display:block}
+
+.container{max-width:var(--container-max);margin:0 auto;padding:80px 40px}
+
+.impact__head{display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:start;margin-bottom:48px}
+.impact__kicker{color:var(--accent);font-size:13px;letter-spacing:0.18em;text-transform:uppercase}
+.impact__title{font-family:'Playfair Display', serif;color:var(--accent);font-weight:700;font-size:96px;line-height:0.9;margin:6px 0}
+.impact__lead{color:var(--muted);font-size:16px;line-height:1.9}
+
+.impact__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:24px}
+.impact__stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:36px;border-radius:28px;position:relative;border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+.impact__stat:before{content:'';position:absolute;left:12px;top:12px;right:12px;height:4px;border-top-left-radius:22px;border-top-right-radius:22px;background:transparent}
+.impact__stat:nth-child(1):before{border-top:3px solid var(--accent-2)}
+.impact__stat:nth-child(2):before{border-top:3px solid rgba(202,168,106,0.08)}
+.impact__stat:nth-child(3):before{border-top:3px solid rgba(202,168,106,0.08)}
+
+.impact__tag{color:var(--accent);font-family:'Playfair Display',serif;font-size:48px;margin:0 0 6px}
+.impact__stat-title{font-family:'Playfair Display',serif;color:var(--accent);font-size:28px;margin:0 0 12px}
+.impact__stat-desc{color:var(--muted);font-size:14px;line-height:1.8;margin:0}
+
+/* card outline subtle gold stroke */
+.impact__stat{box-shadow:0 6px 0 rgba(0,0,0,0.25) inset}
+.impact__stat{border:1px solid rgba(202,168,106,0.08)}
+
+@media(max-width:1100px){
+  .impact__head{grid-template-columns:1fr;}
+  .impact__title{font-size:64px}
+  .impact__grid{grid-template-columns:1fr}
+}
