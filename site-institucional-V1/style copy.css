@@ -1,0 +1,139 @@
+/* Contato */
+ 
+/* Reset: zera margens e espaços padrão do navegador */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cores reutilizáveis */
+:root {
+    --gold-f: #C99E63;
+    --cream-f: #F3E9DC;
+}
+
+/* Fundo preto e fonte padrão da página */
+body {
+    background-color: #111113;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Seção da tela inteira, com fundo em degradê vinho */
+.contato {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 7vw 80px;
+    background: linear-gradient(140deg, #171216, #31121d);
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Caixa que centraliza e limita a largura do conteúdo */
+.container-contato {
+    width: 100%;
+    max-width: 1050px;
+}
+
+/* Texto dourado pequeno acima do título */
+.titulo-contato {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold-f);
+    margin-bottom: 17px;
+}
+
+/* Título grande da tela */
+.contato h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(52px, 6vw, 82px);
+    line-height: .95;
+    letter-spacing: -.025em;
+    color: var(--cream-f);
+}
+
+/* Parágrafo abaixo do título */
+.texto-contato {
+    max-width: 600px;
+    margin-top: 24px;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(255,255,255,.65);
+}
+
+/* Área do formulário, dividida em 2 colunas */
+.form-contato {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+/* Campos de texto (Nome, E-mail, Vinícola, Telefone e Mensagem) */
+.form-contato input,
+.form-contato textarea {
+    width: 100%;
+    padding: 16px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.22);
+    border-radius: 14px;
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+}
+
+/* Texto de exemplo dentro dos campos */
+.form-contato input::placeholder,
+.form-contato textarea::placeholder {
+    color: rgba(255,255,255,.42);
+}
+
+/* Caixa de mensagem: ocupa a linha inteira */
+.form-contato textarea {
+    grid-column: 1 / -1;
+    min-height: 130px;
+    resize: vertical;
+    font-family: ui-monospace, "Courier New", monospace;
+    font-size: 12px;
+}
+
+/* Botão verde "Enviar mensagem" */
+.btn-enviar {
+    width: max-content;
+    padding: 14px 22px;
+    background-color: #306044;
+    border: 1px solid #5e8c6a;
+    border-radius: 999px;
+    color: #d5cdc2;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* Frase pequena no fim da tela */
+.rodape-contato {
+    margin-top: 70px;
+    font-size: 9px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.35);
+}
+
+/* Ajustes para celular (telas até 850px) */
+@media (max-width: 850px) {
+    .contato {
+        min-height: auto;
+        padding: 105px 6vw 70px;
+    }
+
+    /* Campos em 1 coluna */
+    .form-contato {
+        grid-template-columns: 1fr;
+    }
+}
