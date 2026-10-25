@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt">
+    
 
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="id-card-solid-full.svg">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
     <title>Cadastro</title>
 </head>
 
@@ -25,6 +34,13 @@
         <div class="campo">
             <span class="icone">🔒</span>
             <input type="password" id="ipt_senha" placeholder="Senha">
+        </div>
+
+        <div class="campo">
+            <span class="icone">🪪</span>
+            <input type="text" id="ipt_cpf" placeholder="CPF(somente números)">
+
+
         </div>
 
         <button onclick="AGA()">Cadastrar</button>
@@ -54,7 +70,7 @@
     </div>
 
     <div class="card" id="div_criar" style="display: none;">
-        <h2>Criar</h2>
+        <h2>Cadastrar</h2>
 
         <div class="campo">
             <span class="icone">🏢</span>
@@ -93,17 +109,23 @@
             cnpj_empresa: "12.345.678/0001-90",
             email_base: "valeverdevinhos.com",
             codigo_cadastro: "EMP-2027-01"
+            
         }
+
+        
+            
+        
     ];
 
     function AGA() {
         let nome_usuario = ipt_nome_usuario.value;
         let email = ipt_email.value;
         let senha = ipt_senha.value;
+        let cpf = Number(ipt_cpf.value)
         let existe = false;
 
-        if (nome_usuario == "" || email == "" || senha == "") {
-            alert(`Preencha nome, email e senha`)
+        if (nome_usuario == "" || email == "" || senha == "" || cpf == "") {
+            alert(`Preencha nome, email, senha e CPF`)
         }
         else {
             for (let i = 0; i < usuario.length; i++) {

@@ -5,7 +5,7 @@ USE SenseNoir;
 -- ===================================================================================================================================
 -- CRIAÇÃO DAS TABELAS
 -- ===================================================================================================================================
-
+DROP TABLE empresa;
 CREATE TABLE empresa (
     id_empresa INT PRIMARY KEY AUTO_INCREMENT,
     nome_empresa VARCHAR(70) NOT NULL,
@@ -15,19 +15,20 @@ CREATE TABLE empresa (
     dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-
+DROP TABLE usuario;
 CREATE TABLE usuario (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     fk_empresa INT NOT NULL,
     nome_usuario VARCHAR(70) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    ativo TINYINT(1) NOT NULL DEFAULT 1,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    ativo TINYINT(1) NOT NULL DEFAULT 1 ,
     dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-
+DROP TABLE sensor;
 CREATE TABLE sensor (
     id_sensor INT PRIMARY KEY AUTO_INCREMENT,
     numero_serie VARCHAR(20) NOT NULL UNIQUE,
@@ -38,7 +39,7 @@ CREATE TABLE sensor (
     FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-
+drop table leitura_sensor;
 CREATE TABLE leitura_sensor (
     id_leitura INT PRIMARY KEY AUTO_INCREMENT,
     fk_sensor INT NOT NULL,
@@ -49,7 +50,7 @@ CREATE TABLE leitura_sensor (
     CHECK (umidade BETWEEN 0 AND 100)
 );
 
-
+DROP TABLE alerta;
 CREATE TABLE alerta (
     id_alerta INT PRIMARY KEY AUTO_INCREMENT,
     fk_leitura INT NOT NULL,
@@ -74,13 +75,13 @@ INSERT INTO empresa (nome_empresa, cnpj_empresa, codigo_cadastro, area_hectares)
 ('Terroir dos Pampas', '12.147.968/0001-24', 'TDP-2026-07', 25.00);
 
 
-INSERT INTO usuario (fk_empresa, nome_usuario, email, senha, ativo) VALUES
-(1, 'Marina Costa', 'marina.costa@valeverdevinhos.com', 'Mc@2026vv', 1),
-(1, 'Paulo Henrique', 'paulo.henrique@valeverdevinhos.com', 'Ph#26vale', 1),
-(2, 'Renata Alves', 'renata.alves@quintadosol.com.br', 'Ra_qs2026', 1),
-(4, 'João Vitor', 'joao.vitor@vinhedosdealtitude.com', 'Jv!alt26',  1),
-(4, 'Camila Duarte', 'camila.duarte@vinhedosdealtitude.com', 'Cd_alt09',  1),
-(6, 'Bruno Salles', 'bruno.salles@rotadasuvas.com', 'Bs#rota26', 1);
+INSERT INTO usuario (fk_empresa, nome_usuario, email, cpf, senha, ativo) VALUES
+(1, 'Marina Costa', 'marina.costa@valeverdevinhos.com', '12345678976', 'Mc@2026vv', 1),
+(1, 'Paulo Henrique', 'paulo.henrique@valeverdevinhos.com', '12345678844', 'Ph#26vale', 1),
+(2, 'Renata Alves', 'renata.alves@quintadosol.com.br', '12345478909', 'Ra_qs2026', 1),
+(4, 'João Vitor', 'joao.vitor@vinhedosdealtitude.com', '12346658909', 'Jv!alt26',  1),
+(4, 'Camila Duarte', 'camila.duarte@vinhedosdealtitude.com', '21345678909', 'Cd_alt09',  1),
+(6, 'Bruno Salles', 'bruno.salles@rotadasuvas.com', '12999890900', 'Bs#rota26', 1);
 
 
 INSERT INTO sensor (numero_serie, fk_empresa, localizacao, dt_instalacao, ativo) VALUES
