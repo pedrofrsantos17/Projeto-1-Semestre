@@ -32,6 +32,8 @@ body {
     margin: 0 0 5px 0;
     color: #b89a63;
     font-size: 60px;
+
+   
 }
 
 .campo {
@@ -88,4 +90,5 @@ button {
 button:hover {
     background: #571420;
 }
+
 

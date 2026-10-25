@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <title>Login</title>
+</head>
+
+<body>
+<div class="card" id="div_login">
+  <h2>Login</h2>
+
+  <div class="campo">
+    <span class="icone">👤</span>
+    <input type="text" id="ipt_email" placeholder="Email">
+  </div>
+
+  <div class="campo">
+    <span class="icone">🔒</span>
+    <input type="password" id="ipt_senha" placeholder="Senha">
+  </div>
+  <button onclick="entrar()">Entrar</button>
+
+</div>
+
+<div class="card" id="div_exibir" style="display: none;">
+  <h2>Bem-vindo!</h2>
+  <span id="exibir" style="color: #F3EBD3;"></span>
+</div>
+</body>
+
+<script>
+
+  // Usuários simulados para demonstração (fiz igual no cadastro mas não botei os negocios de BD)
+  let usuario = [
+    {
+      nome_usuario: "Maria",
+      email: "maria@valeverdevinhos.com",
+      senha: "123456",
+      empresa: "Vale Verde Vinhos"
+    },
+    {
+      nome_usuario: "João",
+      email: "joao@email.com",
+      senha: "abc123",
+      empresa: ""
+    }
+  ];
+
+  function entrar() {
+    let email = ipt_email.value;
+    let senha = ipt_senha.value;
+    let achou = null;
+
+    if (email == "" || senha == "") {
+      alert(`Preencha email e senha`)
+    }
+    else {
+      for (let i = 0; i < usuario.length; i++) {
+        if (usuario[i].email == email) {
+          achou = usuario[i];
+        }
+      }
+
+      if (achou == null) {
+        alert(`Email não cadastrado`)
+      }
+      else if (achou.senha != senha) {
+        alert(`Senha incorreta`)
+      }
+      else {
+        div_login.style.display = "none";
+        div_exibir.style.display = "flex";
+        exibir.innerHTML = `Login realizado com sucesso, ${achou.nome_usuario}!`;
+      }
+    }
+  }
+
+</script>
+
+</html>
