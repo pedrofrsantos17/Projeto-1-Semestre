@@ -168,6 +168,7 @@ select option {
 /* .valor_card_destaque: o número do card grande */
 .valor_card_destaque {
     font-size: 40px; /* letra maior que os outros números */
+    text-align: center;
 }
 
 /* os 4 cards pequenos (a vírgula separa vários seletores com o mesmo estilo) */
@@ -186,7 +187,7 @@ select option {
 /* a div onde o JavaScript escreve o resultado do card grande */
 #divMsgToneladaPerdida {
     font-weight: bold; /* negrito */
-    text-align: left; /* centralizado */
+    text-align: center; /* centralizado */
     margin-top: 30px; /* espaço em cima */
     font-size: 32px; /* tamanho da letra */
 }
@@ -236,53 +237,68 @@ select option {
 
  /* Esconde resultados por padrão: blocos, cards pequenos e card-destaque não devem aparecer */
         /* Usamos visibility + height/opacity para preservar layout e permitir transição suave */
-        .bloco1, .bloco2, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4, .card-destaque, .chamada {
-            visibility: hidden !important;
-            opacity: 0 !important;
-            transform: translateY(4px); /* animação mais sutil */
-            transition: visibility 0s linear 0.12s, opacity 0.12s ease, transform 0.12s ease; /* duração reduzida */
-            /* garante espaço para que o texto fique posicionado antes de aparecer */
-            min-height: 64px; /* mantém blocos quadrados/consistentes */
-            width: 100%;
-            box-sizing: border-box;
-        }
+/* Esconde resultados por padrão usando visibilidade e opacidade para transição suave
+   Mantém o fluxo de layout (sem forçar largura/altura estranhas) */
+.bloco1, .bloco2, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4, .card-destaque, .chamada {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: visibility 0s linear 0.12s, opacity 0.18s ease, transform 0.18s ease;
+}
 
-        /* Quando a classe .resultados-visiveis estiver no container, mostra os elementos */
-        .cartao-direita.resultados-visiveis .bloco1,
-        .cartao-direita.resultados-visiveis .bloco2,
-        .cartao-direita.resultados-visiveis .card-pequeno1,
-        .cartao-direita.resultados-visiveis .card-pequeno2,
-        .cartao-direita.resultados-visiveis .card-pequeno3,
-        .cartao-direita.resultados-visiveis .card-pequeno4,
-        .cartao-direita.resultados-visiveis .card-destaque,
-        .cartao-direita.resultados-visiveis .chamada {
-            visibility: visible !important;
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            transition-delay: 0s;
-        }
+/* Quando a classe .resultados-visiveis estiver no container, mostra os elementos */
+.cartao-direita.resultados-visiveis .bloco1,
+.cartao-direita.resultados-visiveis .bloco2,
+.cartao-direita.resultados-visiveis .card-pequeno1,
+.cartao-direita.resultados-visiveis .card-pequeno2,
+.cartao-direita.resultados-visiveis .card-pequeno3,
+.cartao-direita.resultados-visiveis .card-pequeno4,
+.cartao-direita.resultados-visiveis .card-destaque,
+.cartao-direita.resultados-visiveis .chamada {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
 
-        /* Especifica alinhamento interno dos textos para manter posição previsível */
-        .card-destaque, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: left;
-            padding: 12px;
-            box-sizing: border-box;
-            /* Força proporção quadrada visual nos cards pequenos via aspect-ratio (fallback to min-height) */
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
+/* Alinhamento interno e dimensionamento responsivo dos cards */
+.card-destaque {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 20px;
+    min-height: 160px; /* mantém presença visual sem fixar altura rígida */
+    box-sizing: border-box;
+}
 
-/* @media: estas regras só valem em telas com até 720px de largura (celular) */
+.card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 0; /* cresce igualmente dentro do .bloco1/.bloco2 */
+    min-height: 120px;
+    box-sizing: border-box;
+    margin-left: 8px; /* pequeno espaçamento interno entre cards */
+}
+
+/* Ajusta blocos que contêm os dois cards para espaçarem corretamente */
+.bloco1, .bloco2 {
+    display: flex;
+    gap: 12px;
+}
+
+/* Mobile: quebra os cartões em coluna */
 @media (max-width: 720px) {
     .pagina {
-        flex-direction: column; /* os cartões ficam um embaixo do outro */
+        flex-direction: column;
     }
 
     .cartao-esquerda,
     .cartao-direita {
-        width: 100%; /* cada cartão ocupa a largura toda */
+        width: 100%;
+    }
+
+    .bloco1, .bloco2 {
+        flex-direction: column;
     }
 }
-        }
