@@ -5,7 +5,7 @@ USE SenseNoir;
 -- ===================================================================================================================================
 -- CRIAÇÃO DAS TABELAS
 -- ===================================================================================================================================
-DROP TABLE empresa;
+
 CREATE TABLE empresa (
     id_empresa INT PRIMARY KEY AUTO_INCREMENT,
     nome_empresa VARCHAR(70) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE empresa (
     dt_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE usuario;
+
 CREATE TABLE usuario (
     id_usuario INT PRIMARY KEY AUTO_INCREMENT,
     fk_empresa INT NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE usuario (
     FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-DROP TABLE sensor;
+
 CREATE TABLE sensor (
     id_sensor INT PRIMARY KEY AUTO_INCREMENT,
     numero_serie VARCHAR(20) NOT NULL UNIQUE,
@@ -39,7 +39,7 @@ CREATE TABLE sensor (
     FOREIGN KEY (fk_empresa) REFERENCES empresa(id_empresa)
 );
 
-drop table leitura_sensor;
+
 CREATE TABLE leitura_sensor (
     id_leitura INT PRIMARY KEY AUTO_INCREMENT,
     fk_sensor INT NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE leitura_sensor (
     CHECK (umidade BETWEEN 0 AND 100)
 );
 
-DROP TABLE alerta;
+
 CREATE TABLE alerta (
     id_alerta INT PRIMARY KEY AUTO_INCREMENT,
     fk_leitura INT NOT NULL,
