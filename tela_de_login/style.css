@@ -26,6 +26,13 @@ body {
     gap: 50px;
 }
 
+#exibir {
+
+text-align: center;
+}
+
+
+
 .card h2 {
     display: flex;
     justify-content: center;
