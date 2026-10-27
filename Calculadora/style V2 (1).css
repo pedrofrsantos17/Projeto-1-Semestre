@@ -1,244 +1,292 @@
-/* O asterisco (*) pega TODOS os elementos da página */
+/* ===== CORES (só as que combinam, tiradas do CSS do site) ===== */
+/* :root guarda as variáveis. Para usar uma cor, escreve var(--nome) */
+:root {
+    --gold-f: #C99E63; /* dourado: títulos, números e botão principal */
+    --wine-f: #510e1b; /* vinho: card de destaque e botões */
+    --card-f: #1C1B1E; /* cinza escuro dos cards */
+    --line-f: rgba(201, 158, 99, .35); /* dourado transparente para as bordas */
+    --cream-f: #F3E9DC; /* creme: textos */
+
+    --fundo: #210208; /* fundo escuro da página (mesmo tom do site) */
+    --campo: #26252a; /* fundo dos inputs (um pouco mais claro que o card) */
+}
+
 * {
-    margin: 0; /* tira o espaço de fora que o navegador coloca por padrão */
-    padding: 0; /* tira o espaço de dentro que o navegador coloca por padrão */
-    box-sizing: border-box; /* o width passa a contar também o padding, o que facilita calcular o tamanho das caixas */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* o width passa a contar também o padding */
 }
 
 /* body: o corpo da página inteira */
 body {
-    font-family: Arial, sans-serif; /* tipo de letra (se não tiver Arial, usa outra sem serifa) */
-    margin-top: 50px; /* espaço de fora, em cima */
-    padding: 40px 16px; /* espaço de dentro: 40px em cima e embaixo, 16px nos lados */
-    background: #d9cfd6; /* cor de fundo da página (rosa acinzentado) */
+    font-family: Arial, sans-serif;
+    padding: 90px 16px 40px 16px; /* em cima, direita, embaixo, esquerda */
+    background: var(--fundo);
+    color: var(--cream-f);
 }
 
 /* .pagina: caixa que segura os dois cartões */
 .pagina {
-    display: flex; /* coloca os filhos (os dois cartões) um do lado do outro */
-    gap: 30px; /* espaço entre os cartões */
-    width: 100%; /* ocupa toda a largura disponível... */
-    max-width: 1000px; /* ...mas nunca passa de 1000px */
-    margin: auto; /* centraliza a caixa na tela */
+    display: flex; /* cartões lado a lado */
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: auto; /* centraliza na tela */
 }
 
-/* .cartao-esquerda: cartão branco com o formulário */
+/* .cartao-esquerda: cartão escuro com o formulário */
 .cartao-esquerda {
-    width: 50%; /* ocupa metade da largura */
-    padding: 40px; /* espaço entre a borda do cartão e o conteúdo */
-    background-color: white; /* fundo branco */
-    border-radius: 16px; /* cantos arredondados */
+    width: 50%;
+    padding: 40px;
+    background-color: var(--card-f);
+    border: 1px solid var(--line-f); /* borda dourada fininha */
+    border-top: 2px solid var(--wine-f); /* linha vinho em cima, como nos cards do site */
+    border-radius: 24px;
 }
 
-/* h1 que está dentro do cartão da esquerda: o título SIMULE SEUS DADOS */
+/* o título principal */
 .cartao-esquerda h1 {
-    margin-bottom: 24px; /* espaço embaixo do título */
-    font-family: Georgia, serif; /* letra com serifa, mais elegante */
-    font-size: 28px; /* tamanho da letra */
-    font-weight: normal; /* tira o negrito que o h1 tem por padrão */
-    letter-spacing: 1px; /* espaço extra entre as letras */
-    color: #6b1f27; /* cor da letra (vinho) */
+    margin-bottom: 24px;
+    font-family: 'Cormorant Garamond', Georgia, serif; /* letra dos títulos do site (se não carregar, usa Georgia) */
+    font-size: 34px;
+    font-weight: normal;
+    line-height: 1.15;
+    color: var(--cream-f);
 }
 
-/* .texto-descricao: o parágrafo que explica o problema dos fungos */
+/* a palavra FUNGOS (dentro da tag i) */
+.cartao-esquerda h1 i {
+    color: var(--gold-f);
+}
+
+/* o parágrafo que explica o problema dos fungos */
 .texto-descricao {
-    margin-bottom: 24px; /* espaço embaixo do texto */
-    color: #5c5c5c; /* cinza escuro */
-    font-size: 14px; /* tamanho da letra */
-    line-height: 1.7; /* altura de cada linha (deixa o texto mais arejado) */
+    margin-bottom: 24px;
+    opacity: 0.8; /* deixa o texto um pouco mais apagado */
+    font-size: 14px;
+    line-height: 1.7;
 }
 
 /* .campo: caixa que agrupa as perguntas */
 .campo {
-    margin-bottom: 16px; /* espaço embaixo, antes do botão */
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
-/* #select_vinho: o # pega o elemento pelo id. É a lista Sim/Não */
+/* #select_vinho: a lista Sim/Não */
 #select_vinho {
-    background-color: rgb(66, 9, 9); /* fundo vinho escuro */
-    color: beige; /* letra bege */
-    border-radius: 20px; /* bem arredondado (formato de pílula) */
-    border: 1px rgb(66, 9, 9); /* borda da mesma cor do fundo */
-    height: 30px; /* altura */
-    width: 90px; /* largura */
-    text-align: center; /* texto centralizado */
-    font-weight: 700; /* letra em negrito */
+    background-color: var(--wine-f);
+    color: var(--cream-f);
+    border-radius: 20px; /* formato de pílula */
+    border: 1px solid var(--gold-f);
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    font-weight: 700;
+    margin-left: 8px;
 }
 
-/* .info: os textinhos pequenos de observação (com asterisco) */
-.info {
-    color: rgb(110, 110, 109); /* cinza */
-    font-size: 12px; /* letra pequena */
-    margin: 2px 0px; /* 2px em cima e embaixo, 0 nos lados */
-}
-
-/* select option: as opções que aparecem quando abre o select */
+/* as opções que aparecem quando abre o select */
 select option {
-    border-radius: 20px; /* cantos arredondados (o efeito depende do navegador) */
+    background-color: var(--card-f);
+    color: var(--cream-f);
 }
 
-/* .campo input: todos os inputs que estão dentro de .campo (a caixinha de digitar) */
+/* todos os inputs dentro de .campo */
 .campo input {
-    width: 100%; /* ocupa toda a largura da caixa */
-    padding: 14px 16px; /* espaço de dentro: 14px em cima e embaixo, 16px nos lados */
-    border: none; /* tira a borda */
-    border-radius: 10px; /* cantos arredondados */
-    background-color: #f1efec; /* fundo cinza clarinho */
-    font-size: 14px; /* tamanho da letra */
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--line-f);
+    border-radius: 10px;
+    background-color: var(--campo);
+    color: var(--cream-f); /* letra que a pessoa digita */
+    font-size: 14px;
     margin-top: 8px;
 }
 
-/* .linha-garrafa: cada linha de tipo de garrafa (nome + toneladas + preço) */
-.linha-garrafa {
-    display: flex; /* coloca nome e inputs lado a lado */
-    align-items: center; /* alinha tudo no meio, na vertical */
-    gap: 10px; /* espaço entre o nome e os inputs */
-    margin-bottom: 10px; /* espaço entre uma linha e outra */
+/* quando clica no input, a borda fica dourada forte */
+.campo input:focus {
+    outline: none; /* tira o contorno azul padrão */
+    border-color: var(--gold-f);
 }
 
-/* o nome do tamanho da garrafa (ex.: 0,75 L (padrão)) */
+/* placeholder: o texto de dica dentro do input */
+.campo input::placeholder {
+    color: var(--cream-f);
+    opacity: 0.5;
+}
+
+/* .linha-garrafa: cada linha de tipo de garrafa */
+.linha-garrafa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* o nome do tamanho da garrafa */
 .linha-garrafa span {
-    width: 120px; /* largura fixa, para os inputs ficarem alinhados */
-    flex-shrink: 0; /* não deixa o nome encolher quando falta espaço */
-    font-size: 14px; /* tamanho da letra */
+    width: 120px;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--gold-f);
 }
 
 /* os dois inputs de cada linha (toneladas e preço) */
 .linha-garrafa input {
-    flex: 1; /* cada input divide igualmente o espaço que sobra */
-    min-width: 0; /* permite o input ficar menor, sem estourar o cartão */
-    padding: 10px 12px; /* espaço de dentro menor que o input normal */
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
 }
 
 /* .btn-calcular: o botão "Simular perdas" */
 .btn-calcular {
-    background-color: rgb(66, 9, 9); /* fundo vinho escuro */
-    color: beige; /* letra bege */
-    font-size: 18px; /* tamanho da letra */
-    font-weight: bold; /* negrito */
-    border: 2px solid rgb(66, 9, 9); /* borda de 2px, sólida, da mesma cor do fundo */
-    border-radius: 18px; /* cantos bem arredondados */
-    padding: 10px; /* espaço de dentro */
-    width: 100%; /* largura do botão */
-    margin-top: 80px;
+    background-color: var(--gold-f);
+    color: var(--fundo); /* letra escura para dar contraste */
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase; /* tudo em maiúsculo */
+    border: none;
+    border-radius: 30px;
+    padding: 14px;
+    width: 100%;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+.btn-calcular:hover {
+    background-color: var(--cream-f);
+}
+
+/* as fontes dos valores */
+.cartao-esquerda h4 {
+    color: var(--cream-f);
+    opacity: 0.5;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.5;
 }
 
 /* .cartao-direita: coluna dos resultados */
 .cartao-direita {
-    display: flex; /* organiza os filhos em linha ou coluna */
-    flex-direction: column; /* aqui, em coluna: um embaixo do outro */
-    gap: 16px; /* espaço entre os itens */
-    width: 60%; /* largura da coluna */
+    display: flex;
+    flex-direction: column; /* um embaixo do outro */
+    gap: 16px;
+    width: 50%;
 }
 
-/* todos os parágrafos (p) da coluna da direita: os títulos dos cards */
+/* os parágrafos da coluna da direita: títulos dos cards */
 .cartao-direita p {
-    margin-top: 10px; /* espaço em cima */
-    text-align: center; /* texto centralizado */
+    margin-top: 10px;
+    text-align: center;
 }
 
 /* .card-destaque: card grande com o resultado principal */
 .card-destaque {
-    height: 180px; /* altura */
-    background: #7a2430; /* fundo vinho */
-    border-radius: 16px; /* cantos arredondados */
-    color: beige; /* letra bege */
+    background: var(--wine-f);
+    border: 1px solid var(--gold-f);
+    border-radius: 24px;
 }
 
 /* o título dentro do card grande */
 .card-destaque p {
-    margin-left: 90px; /* empurra o texto para a direita */
-    margin-top: 20px; /* espaço em cima */
-    width: 300px; /* largura do texto (força a quebrar em duas linhas) */
-    font-weight: bold; /* negrito */    
+    width: 100%;
+    margin-top: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 /* bloco1 e bloco2: as duas linhas de cards pequenos */
 .bloco1, .bloco2 {
-    display: flex; /* coloca os cards lado a lado */
+    display: flex;
+    gap: 16px;
+}
+
+.bloco2 {
+    margin-top: 16px;
 }
 
 /* .valor_card: os números dos cards pequenos */
 .valor_card {
-    color: #6b1f27; /* cor vinho */
-    font-weight: bold; /* negrito */
-    font-size: 24px; /* tamanho da letra */
+    color: var(--gold-f);
+    font-weight: bold;
+    font-size: 24px;
 }
 
 /* .valor_card_destaque: o número do card grande */
 .valor_card_destaque {
-    font-size: 40px; /* letra maior que os outros números */
-    text-align: center;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 56px;
+    color: var(--gold-f);
 }
 
-/* os 4 cards pequenos (a vírgula separa vários seletores com o mesmo estilo) */
+/* os 4 cards pequenos */
 .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
-    width: 70%; /* largura */
-    min-height: 140px; /* altura mínima (cresce se precisar) */
-    background-color: white; /* fundo branco */
-    color: #5c5c5c; /* letra cinza escuro */
-    font-size: 15px; /* tamanho da letra */
-    border-radius: 16px; /* cantos arredondados */
-    padding: 10px; /* espaço de dentro */
-    margin-left: 20px; /* espaço à esquerda */
-    margin-top: 10px; /* espaço em cima */
+    background-color: var(--card-f);
+    border: 1px solid var(--line-f);
+    font-size: 14px;
+    border-radius: 24px;
+    padding: 20px;
 }
 
-/* a div onde o JavaScript escreve o resultado do card grande */
+/* o título dos cards pequenos fica mais discreto */
+.card-pequeno1 p, .card-pequeno2 p, .card-pequeno3 p, .card-pequeno4 p {
+    margin-top: 0;
+    opacity: 0.8;
+}
+
+/* onde o JavaScript escreve o resultado do card grande */
 #divMsgToneladaPerdida {
-    font-weight: bold; /* negrito */
-    text-align: center; /* centralizado */
-    margin-top: 30px; /* espaço em cima */
-    font-size: 32px; /* tamanho da letra */
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
 }
 
-/* as divs onde o JavaScript escreve o resultado dos cards pequenos */
+/* onde o JavaScript escreve o resultado dos cards pequenos */
 #divMsgPercaDinheiro, #divMsgLucroSemProduto, #divMsgGarrafaPerdida, #divMsgFaturamentoComProduto {
-    text-align: left; /* centralizado */
-    margin-top: 30px; /* espaço em cima */
-    font-size: 16px; /* tamanho da letra */
-}
-
-/* .aviso: texto pequeno de que é uma simulação */
-.cartao-direita .aviso {
-    color: rgb(110, 110, 109); /* cinza */
-    font-size: 12px; /* letra pequena */
-    margin-left: 20px; /* alinha com os cards */
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
 }
 
 /* .chamada: caixa do texto + botão "Contrate o nosso produto" */
 .chamada {
-    margin-left: 20px; /* alinha com os cards */
+    margin-top: 8px;
 }
 
 /* o texto acima do botão final */
 .cartao-direita .chamada p {
-    color: #6b1f27; /* cor vinho */
-    font-weight: bold; /* negrito */
-    font-size: 16px; /* tamanho da letra */
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
 }
 
 /* .btn-contratar: o link que parece um botão */
 .btn-contratar {
-    display: block; /* faz o link ocupar a linha toda, permitindo definir largura e centralizar */
-    width: 260px; /* largura do botão */
-    margin: 12px auto 0 auto; /* 12px em cima, automático nos lados (centraliza), 0 embaixo */
-    padding: 12px; /* espaço de dentro */
-    background-color: rgb(66, 9, 9); /* fundo vinho escuro */
-    color: beige; /* letra bege */
-    font-size: 15px; /* tamanho da letra */
-    font-weight: bold; /* negrito */
-    text-align: center; /* texto centralizado */
-    text-decoration: none; /* tira o sublinhado do link */
-    border-radius: 18px; /* cantos bem arredondados */
+    display: block;
+    width: 260px;
+    margin: 14px auto 0 auto;
+    padding: 14px;
+    background-color: var(--wine-f);
+    border: 1px solid var(--gold-f);
+    color: var(--cream-f);
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
 }
 
-/*     Classes criadas para possibiitar a invisibilidade das divs        */
+.btn-contratar:hover {
+    background-color: var(--gold-f);
+    color: var(--fundo);
+}
 
- /* Esconde resultados por padrão: blocos, cards pequenos e card-destaque não devem aparecer */
-        /* Usamos visibility + height/opacity para preservar layout e permitir transição suave */
-/* Esconde resultados por padrão usando visibilidade e opacidade para transição suave
-   Mantém o fluxo de layout (sem forçar largura/altura estranhas) */
+/* ===== Esconde os resultados até clicar em "Simular perdas" ===== */
 .bloco1, .bloco2, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4, .card-destaque, .chamada {
     visibility: hidden;
     opacity: 0;
@@ -261,30 +309,21 @@ select option {
     transition-delay: 0s;
 }
 
-/* Alinhamento interno e dimensionamento responsivo dos cards */
+/* Alinhamento interno dos cards */
 .card-destaque {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding: 20px;
-    min-height: 160px; /* mantém presença visual sem fixar altura rígida */
-    box-sizing: border-box;
+    justify-content: center;
+    padding: 30px;
+    min-height: 180px;
 }
 
 .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex: 1 1 0; /* cresce igualmente dentro do .bloco1/.bloco2 */
-    min-height: 120px;
-    box-sizing: border-box;
-    margin-left: 8px; /* pequeno espaçamento interno entre cards */
-}
-
-/* Ajusta blocos que contêm os dois cards para espaçarem corretamente */
-.bloco1, .bloco2 {
-    display: flex;
-    gap: 12px;
+    flex: 1 1 0; /* os dois cards da linha dividem o espaço igualmente */
+    min-height: 130px;
 }
 
 /* Mobile: quebra os cartões em coluna */
@@ -296,6 +335,10 @@ select option {
     .cartao-esquerda,
     .cartao-direita {
         width: 100%;
+    }
+
+    .cartao-esquerda {
+        padding: 24px;
     }
 
     .bloco1, .bloco2 {
