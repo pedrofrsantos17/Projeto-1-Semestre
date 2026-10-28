@@ -241,86 +241,6 @@ h1 {
 }
 
 
-
-/*
-#desafio .split {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 8vw;
-    align-items: center;
-    width: 100%;
-}
-
-
-#desafio h2 {
-    font-size: clamp(52px, 6vw, 82px);
-    line-height: 0.85;
-    color: var(--gold);
-    letter-spacing: -0.025em;
-    font-family: "Cormorant Garamond", serif;
-    font-weight: 500;
-}
-
-
-#desafio .lead {
-    font-size: 15px;
-    line-height: 1.9;
-    color: #c5bdb3;
-    max-width: 600px;
-    margin-top: 28px;
-}
-
-
-#desafio .quote {
-    margin-top: 28px;
-    padding-left: 20px;
-    border-left: 2px solid var(--gold);
-    font-family: "Cormorant Garamond", serif;
-    font-size: 28px;
-    line-height: 1.05;
-    color: var(--gold);
-}
-
-#desafio .story-card {
-    background: #1c1b1e;
-    border: 1px solid var(--gold);
-    border-top: 3px solid #81243e;
-    padding: 34px;
-    border-radius: 28px;
-    box-shadow: var(--shadow);
-}
-
-
-#desafio .eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #c5bdb3;
-    font-weight: 700;
-}
-
-#desafio .story-card p {
-    font-size: 13px;
-    line-height: 1.9;
-    color: #c5bdb3;
-    margin-top: 20px;
-}
-
-
-@media (max-width: 850px) {
-    #desafio.section {
-        padding: 105px 6vw 70px;
-        min-height: auto;
-    }
-
-    #desafio .split {
-        grid-template-columns: 1fr;
-    }
-}
-*/
-
-/* TELA DESAFIO*/
-
 .section-desafio {
     background: radial-gradient(circle at bottom left,
             #111113 40%,
@@ -847,4 +767,334 @@ h1 {
     line-height: 1.6;
     color: rgba(255, 255, 255, .65);
     margin: 0;
+}
+
+
+.calculadora {
+    background: radial-gradient(circle at bottom right,
+            #230c14 10%,
+            #0c2115 100%);
+    color: var(--cream-f);
+    font-family: Arial, sans-serif;
+    padding: 100px 24px 80px;
+}
+
+
+/* .pagina: caixa que segura os dois cartões */
+.pagina {
+    display: flex; /* cartões lado a lado */
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: auto; /* centraliza na tela */
+}
+
+/* .cartao-esquerda: cartão escuro com o formulário */
+.cartao-esquerda {
+    width: 50%;
+    padding: 40px;
+    background-color: var(--card-f);
+    border: 1px solid var(--line-f); /* borda dourada fininha */
+    border-top: 2px solid var(--wine-f); /* linha vinho em cima, como nos cards do site */
+    border-radius: 24px;
+}
+
+/* o título principal */
+.cartao-esquerda h1 {
+    margin-bottom: 24px;
+    font-family: 'Cormorant Garamond', Georgia, serif; /* letra dos títulos do site (se não carregar, usa Georgia) */
+    font-size: 34px;
+    font-weight: normal;
+    line-height: 1.15;
+    color: var(--cream-f);
+    letter-spacing: normal;
+}
+
+/* a palavra FUNGOS (dentro da tag i) */
+.cartao-esquerda h1 i {
+    color: var(--gold-f);
+}
+
+/* o parágrafo que explica o problema dos fungos */
+.texto-descricao {
+    margin-bottom: 24px;
+    opacity: 0.8; /* deixa o texto um pouco mais apagado */
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* .campo: caixa que agrupa as perguntas */
+.campo {
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* #select_vinho: a lista Sim/Não */
+#select_vinho {
+    background-color: var(--wine-f);
+    color: var(--cream-f);
+    border-radius: 20px; /* formato de pílula */
+    border: 1px solid var(--gold-f);
+    height: 30px;
+    width: 90px;
+    text-align: center;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+/* as opções que aparecem quando abre o select */
+select option {
+    background-color: var(--card-f);
+    color: var(--cream-f);
+}
+
+/* todos os inputs dentro de .campo */
+.campo input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--line-f);
+    border-radius: 10px;
+    background-color: var(--campo);
+    color: var(--cream-f); /* letra que a pessoa digita */
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* quando clica no input, a borda fica dourada forte */
+.campo input:focus {
+    outline: none; /* tira o contorno azul padrão */
+    border-color: var(--gold-f);
+}
+
+/* placeholder: o texto de dica dentro do input */
+.campo input::placeholder {
+    color: var(--cream-f);
+    opacity: 0.5;
+}
+
+/* .linha-garrafa: cada linha de tipo de garrafa */
+.linha-garrafa {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* o nome do tamanho da garrafa */
+.linha-garrafa span {
+    width: 120px;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--gold-f);
+}
+
+/* os dois inputs de cada linha (toneladas e preço) */
+.linha-garrafa input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+}
+
+/* .btn-calcular: o botão "Simular perdas" */
+.btn-calcular {
+    background-color: var(--gold-f);
+    color: var(--fundo); /* letra escura para dar contraste */
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase; /* tudo em maiúsculo */
+    border: none;
+    border-radius: 30px;
+    padding: 14px;
+    width: 100%;
+    margin-top: 40px;
+    cursor: pointer;
+}
+
+
+/* as fontes dos valores */
+.cartao-esquerda h4 {
+    color: var(--cream-f);
+    opacity: 0.5;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+/* .cartao-direita: coluna dos resultados */
+.cartao-direita {
+    display: flex;
+    flex-direction: column; /* um embaixo do outro */
+    gap: 16px;
+    width: 50%;
+}
+
+/* os parágrafos da coluna da direita: títulos dos cards */
+.cartao-direita p {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* .card-destaque: card grande com o resultado principal */
+.card-destaque {
+    background: var(--wine-f);
+    border: 1px solid var(--gold-f);
+    border-radius: 24px;
+}
+
+/* o título dentro do card grande */
+.card-destaque p {
+    width: 100%;
+    margin-top: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+/* bloco1 e bloco2: as duas linhas de cards pequenos */
+.bloco1, .bloco2 {
+    display: flex;
+    gap: 16px;
+}
+
+.bloco2 {
+    margin-top: 16px;
+}
+
+/* .valor_card: os números dos cards pequenos */
+.valor_card {
+    color: var(--gold-f);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* .valor_card_destaque: o número do card grande */
+.valor_card_destaque {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 56px;
+    color: var(--gold-f);
+}
+
+/* os 4 cards pequenos */
+.card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
+    background-color: var(--card-f);
+    border: 1px solid var(--line-f);
+    font-size: 14px;
+    border-radius: 24px;
+    padding: 20px;
+}
+
+/* o título dos cards pequenos fica mais discreto */
+.card-pequeno1 p, .card-pequeno2 p, .card-pequeno3 p, .card-pequeno4 p {
+    margin-top: 0;
+    opacity: 0.8;
+}
+
+/* onde o JavaScript escreve o resultado do card grande */
+#divMsgToneladaPerdida {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+/* onde o JavaScript escreve o resultado dos cards pequenos */
+#divMsgPercaDinheiro, #divMsgLucroSemProduto, #divMsgGarrafaPerdida, #divMsgFaturamentoComProduto {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* .chamada: caixa do texto + botão "Contrate o nosso produto" */
+.chamada {
+    margin-top: 8px;
+}
+
+/* o texto acima do botão final */
+.cartao-direita .chamada p {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px;
+}
+
+/* .btn-contratar: o link que parece um botão */
+.btn-contratar {
+    display: block;
+    width: 260px;
+    margin: 14px auto 0 auto;
+    padding: 14px;
+    background-color: var(--wine-f);
+    border: 1px solid var(--gold-f);
+    color: var(--cream-f);
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 30px;
+}
+
+.btn-contratar:hover {
+    background-color: var(--gold-f);
+    color: var(--fundo);
+}
+
+/* ===== Esconde os resultados até clicar em "Simular perdas" ===== */
+.bloco1, .bloco2, .card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4, .card-destaque, .chamada {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: visibility 0s linear 0.12s, opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* Quando a classe .resultados-visiveis estiver no container, mostra os elementos */
+.cartao-direita.resultados-visiveis .bloco1,
+.cartao-direita.resultados-visiveis .bloco2,
+.cartao-direita.resultados-visiveis .card-pequeno1,
+.cartao-direita.resultados-visiveis .card-pequeno2,
+.cartao-direita.resultados-visiveis .card-pequeno3,
+.cartao-direita.resultados-visiveis .card-pequeno4,
+.cartao-direita.resultados-visiveis .card-destaque,
+.cartao-direita.resultados-visiveis .chamada {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0s;
+}
+
+/* Alinhamento interno dos cards */
+.card-destaque {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    min-height: 180px;
+}
+
+.card-pequeno1, .card-pequeno2, .card-pequeno3, .card-pequeno4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 0; /* os dois cards da linha dividem o espaço igualmente */
+    min-height: 130px;
+}
+
+/* Mobile: quebra os cartões em coluna */
+@media (max-width: 720px) {
+    .pagina {
+        flex-direction: column;
+    }
+
+    .cartao-esquerda,
+    .cartao-direita {
+        width: 100%;
+    }
+
+    .cartao-esquerda {
+        padding: 24px;
+    }
+
+    .bloco1, .bloco2 {
+        flex-direction: column;
+    }
 }

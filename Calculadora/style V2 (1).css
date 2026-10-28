@@ -1,29 +1,15 @@
-/* ===== CORES (só as que combinam, tiradas do CSS do site) ===== */
-/* :root guarda as variáveis. Para usar uma cor, escreve var(--nome) */
-:root {
-    --gold-f: #C99E63; /* dourado: títulos, números e botão principal */
-    --wine-f: #510e1b; /* vinho: card de destaque e botões */
-    --card-f: #1C1B1E; /* cinza escuro dos cards */
-    --line-f: rgba(201, 158, 99, .35); /* dourado transparente para as bordas */
-    --cream-f: #F3E9DC; /* creme: textos */
 
-    --fundo: #210208; /* fundo escuro da página (mesmo tom do site) */
-    --campo: #26252a; /* fundo dos inputs (um pouco mais claro que o card) */
-}
+.calculadora {
+    --wine-f: #510e1b;
+    --fundo: #210208;
+    --campo: #26252a;
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box; /* o width passa a contar também o padding */
-}
-
-/* body: o corpo da página inteira */
-body {
-    font-family: Arial, sans-serif;
-    padding: 90px 16px 40px 16px; /* em cima, direita, embaixo, esquerda */
     background: var(--fundo);
     color: var(--cream-f);
+    font-family: Arial, sans-serif;
+    padding: 100px 24px 80px;
 }
+
 
 /* .pagina: caixa que segura os dois cartões */
 .pagina {
@@ -52,6 +38,7 @@ body {
     font-weight: normal;
     line-height: 1.15;
     color: var(--cream-f);
+    letter-spacing: normal;
 }
 
 /* a palavra FUNGOS (dentro da tag i) */
