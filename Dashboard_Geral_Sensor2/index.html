@@ -26,12 +26,24 @@
   </header>
 
   <section class="kpis card" aria-label="Resumo dos setores">
+    
+    
+    
+    </canvas>
     <div class="kpi ok"><span class="ico">🍃</span><div><h2>Médio</h2><p class="num">3 <small>setores</small></p><p class="sub">com condições favoráveis</p></div></div>
     <div class="kpi warn"><span class="ico">!</span><div><h2>Atenção</h2><p class="num">3 <small>setores</small></p><p class="sub">com atenção</p></div></div>
     <div class="kpi crit"><span class="ico">!</span><div><h2>Críticos</h2><p class="num">1 <small>setor</small></p><p class="sub">fora da faixa ideal</p></div></div>
     <div class="kpi none"><span class="ico">–</span><div><h2>Sem leitura</h2><p class="num">1 <small>setor</small></p><p class="sub">sem dados recentes</p></div></div>
     <div class="kpi sensors"><div><h2>Sensores ativos</h2><p class="num">159 <small>de 160</small></p><p>enviando dados</p><progress value="159" max="160"></progress><p class="sub">1 sensor sem sinal · Setor 4</p></div></div>
   </section>
+  </section>
+
+<section class="card">
+  <h2>Temperatura dos sensores</h2>
+    <div class="chart-box" style="height:260px;">
+      <canvas id="sensorTemperatura" width="600" height="260"></canvas>
+    </div>
+</section>
 
   <section class="row-charts">
     <article class="card">
@@ -41,11 +53,11 @@
     </article>
     <article class="card">
       <header class="card-head"><div><h2>Temperatura do ar</h2><p class="sub">Média dos setores · últimas 24 h</p></div><span class="pill temp">Faixa ideal: 15 a 25 °C</span></header>
-      <div class="chart"><canvas id="chart-temp" role="img" aria-label="Temperatura média do ar nas últimas 24 h"></canvas></div>
+      <div class="chart"><canvas id="chart-temp" role="img" aria-label="Temperatura média do ar nas últimas 24 h" width="400" height="200"></canvas></div>
     </article>
     <article class="card">
       <header class="card-head"><div><h2>Umidade do ar</h2><p class="sub">Média dos setores · últimas 24 h</p></div><span class="pill hum">Faixa ideal: 60 a 80%</span></header>
-      <div class="chart"><canvas id="chart-hum" role="img" aria-label="Umidade média do ar nas últimas 24 h"></canvas></div>
+      <div class="chart"><canvas id="chart-hum" role="img" aria-label="Umidade média do ar nas últimas 24 h" width="400" height="200"></canvas></div>
     </article>
   </section>
 
@@ -99,7 +111,89 @@
 </main>
 </div>
 <script>document.querySelectorAll('.trend').forEach(t=>t.innerHTML=[...t.dataset.v].map(c=>`<i class="${c}"></i>`).join(''))</script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+
+
+  
+<script>
+ 
+  function createSensorCharts(){
+    if (typeof Chart === 'undefined') return false;
+    const ctx = document.getElementById('sensorTemperatura');
+    if (!ctx) return true; 
+
+    new Chart(ctx, {
+      type: 'line',
+    data: {
+      labels: ['14:00', '14:05', '14:10', '14:15', '14:20', '14:25'],
+      datasets: [{
+        label: 'Temperatura (°C)',
+        data: [21.8, 22.1, 22.4, 22.9, 22.6, 22.4],
+        borderColor: '#7b2d4e',
+        backgroundColor: 'rgba(123, 45, 78, 0.15)',
+        fill: true,
+        tension: 0.35
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { title: { display: true, text: '°C' } }
+      }
+    }
+    });
+    return true;
+  }
+
+  
+  if (!createSensorCharts()){
+    const s = document.querySelector('script[src*="chart.umd.min.js"]');
+    if (s){
+      s.addEventListener('load', createSensorCharts);
+    } else {
+     
+      const id = setInterval(()=>{ if (createSensorCharts()) clearInterval(id); }, 200);
+    }
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+ 
+  function createHumChart(){
+    if (typeof Chart === 'undefined') return false;
+    const el = document.getElementById('chart-hum');
+    if (!el) return true;
+
+    new Chart(el, {
+      type: 'line',
+      data: {
+        labels: ['00:00','04:00','08:00','12:00','16:00','20:00','24:00'],
+        datasets: [{
+          label: 'Umidade (%)',
+          data: [72, 68, 65, 70, 75, 78, 74],
+          borderColor: '#1f7a8c',
+          backgroundColor: 'rgba(31,122,140,0.12)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: { y: { title: { display: true, text: '%' } } }
+      }
+    });
+    return true;
+  }
+
+ 
+  if (!createHumChart()){
+    const s2 = document.querySelector('script[src*="chart.umd.min.js"]');
+    if (s2) s2.addEventListener('load', createHumChart);
+    
+  }
+</script>
 <script src="dashboard.js" defer></script>
 </body>
 </html>
