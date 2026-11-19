@@ -94,148 +94,174 @@
         <span id="exibir" style="color: #F3EBD3;"></span>
     </div>
 
-</body>
 <script>
+    // Se a página for aberta via file:// a fetch falhará. Avisamos o usuário.
+    if (window.location.protocol === 'file:') {
+        alert('Abra esta página através do servidor local (ex: http://localhost:3333/cadastroV2.html) e não via file://');
+    }
+    // Estado temporário do usuário antes de enviar para a API
+    let pendingUser = null;
 
-    let usuario = [];
-    let atual = -1;
-
-    
-    // Empresa simulada para demonstração
-    let empresa = [
-        {
-            nome_empresa: "Vale Verde Vinhos",
-            cnpj_empresa: "12.345.678/0001-90",
-            email_base: "valeverdevinhos.com",
-            codigo_cadastro: "EMP-2027-01"
-            
-        }
-
-        
-            
-        
-    ];
-
+    // passa dos inputs para o objeto pendingUser e abre opções
     function AGA() {
-        let nome_usuario = ipt_nome_usuario.value;
-        let email = ipt_email.value;
-        let senha = ipt_senha.value;
-        let cpf = Number(ipt_cpf.value)
-        let existe = false;
+        const nome = (document.getElementById('ipt_nome_usuario').value || '').trim();
+        const email = (document.getElementById('ipt_email').value || '').trim();
+        const senha = document.getElementById('ipt_senha').value || '';
+        const cpf = (document.getElementById('ipt_cpf').value || '').replace(/\D/g, '');
 
-        if (nome_usuario == "" || email == "" || senha == "" || cpf == "") {
-            alert(`Preencha nome, email, senha e CPF`)
+        if (!nome || !email || !senha || !cpf) {
+            alert('Preencha nome, email, senha e CPF');
+            return;
         }
-        else {
-            for (let i = 0; i < usuario.length; i++) {
-                if (usuario[i].email == email) {
-                    existe = true;
-                }
-            }
 
-            if (existe) {
-                alert(`Esse email já está cadastrado`)
-            }
-            else {
-                usuario.push({
-                    nome_usuario: nome_usuario,
-                    email: email,
-                    senha: senha,
-                    empresa: ""
-                });
+        pendingUser = {
+            nomeServer: nome,
+            emailServer: email,
+            senhaServer: senha,
+            cpfServer: cpf
+        };
 
-                atual = usuario.length - 1;
-
-                div_cadastro.style.display = "none";
-                div_opcoes.style.display = "flex";
-            }
-        }
+        document.getElementById('div_cadastro').style.display = 'none';
+        document.getElementById('div_opcoes').style.display = 'flex';
     }
 
     function MostrarEntrar() {
-        div_opcoes.style.display = "none";
-        div_entrar.style.display = "flex";
-        div_criar.style.display = "none";
+        document.getElementById('div_opcoes').style.display = 'none';
+        document.getElementById('div_entrar').style.display = 'flex';
+        document.getElementById('div_criar').style.display = 'none';
     }
 
     function MostrarCriar() {
-        div_opcoes.style.display = "none";
-        div_criar.style.display = "flex";
-        div_entrar.style.display = "none";
+        document.getElementById('div_opcoes').style.display = 'none';
+        document.getElementById('div_criar').style.display = 'flex';
+        document.getElementById('div_entrar').style.display = 'none';
     }
 
-    function EntrarEmpresa() {
-        let codigo_cadastro = ipt_codigo_cadastro.value;
-        let email_empresarial = ipt_email_empresarial.value;
-        let achou = null;
+    async function EntrarEmpresa() {
+        if (!pendingUser) return alert('Preencha primeiro os dados do usuário.');
 
-        if (codigo_cadastro == "" || email_empresarial == "") {
-            alert(`Preencha o código da empresa e o email empresarial`)
-        }
-        else {
-            for (let i = 0; i < empresa.length; i++) {
-                if (empresa[i].codigo_cadastro == codigo_cadastro) {
-                    achou = empresa[i];
-                }
-            }
+        const codigo = (document.getElementById('ipt_codigo_cadastro').value || '').trim();
+        const emailEmp = (document.getElementById('ipt_email_empresarial').value || '').trim();
 
-            if (achou == null) {
-                alert(`Código de cadastro da empresa não encontrado`)
-            }
-            else if (!email_empresarial.includes("@" + achou.email_base)) {
-                alert(`Esse email não pertence à empresa ${achou.nome_empresa}`)
-            }
-            else {
-                usuario[atual].empresa = achou.nome_empresa;
+        if (!codigo || !emailEmp) return alert('Preencha o código da empresa e o email empresarial');
 
-                div_entrar.style.display = "none";
-                div_exibir.style.display = "flex";
-                exibir.innerHTML = `${usuario[atual].nome_usuario} agora faz parte da empresa ${achou.nome_empresa}!`;
+        // opcional: checar domínio do emailEmp contra o próprio email informado
+        if (!emailEmp.includes('@')) return alert('Email empresarial inválido');
+
+        const payload = {
+            ...pendingUser,
+            codigoCadastroServer: codigo
+        };
+
+        try {
+            const btn = event && event.target ? event.target : null;
+            if (btn) btn.disabled = true;
+
+            const res = await fetch('/usuarios/cadastrar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (res.status === 200) {
+                // após criar o usuário, auto-login
+                await doLoginAndRedirect(pendingUser.emailServer, pendingUser.senhaServer);
+            } else if (res.status === 404) {
+                const txt = await res.text();
+                alert(txt || 'Código de cadastro da empresa não encontrado');
+            } else if (res.status === 409) {
+                const txt = await res.text();
+                alert(txt || 'Email ou CPF já cadastrado');
+            } else {
+                const txt = await res.text();
+                alert('Erro: ' + res.status + ' - ' + txt);
             }
+        } catch (err) {
+            console.error(err);
+            alert('Erro na conexão: ' + err.message);
+        } finally {
+            if (event && event.target) event.target.disabled = false;
         }
     }
 
-    function CriarEmpresa() {
-        let nome_empresa = ipt_nome_empresa.value;
-        let cnpj_empresa = ipt_cnpj_empresa.value;
-        let email_base = ipt_email_base.value;
-        let existe = false;
-        let numero = empresa.length + 1;
+    async function CriarEmpresa() {
+        if (!pendingUser) return alert('Preencha primeiro os dados do usuário.');
 
-        if (nome_empresa == "" || cnpj_empresa == "" || email_base == "") {
-            alert(`Preencha nome, CNPJ e a base do email da empresa`)
+        const nomeEmpresa = (document.getElementById('ipt_nome_empresa').value || '').trim();
+        const cnpj = (document.getElementById('ipt_cnpj_empresa').value || '').trim();
+        const emailBase = (document.getElementById('ipt_email_base').value || '').trim();
+
+        if (!nomeEmpresa || !cnpj || !emailBase) return alert('Preencha nome, CNPJ e a base do email da empresa');
+
+        try {
+            // Chama endpoint único que cria empresa e usuário em sequência (/registro)
+            const registroPayload = {
+                nomeServer: pendingUser.nomeServer,
+                emailServer: pendingUser.emailServer,
+                senhaServer: pendingUser.senhaServer,
+                cpfServer: pendingUser.cpfServer,
+                nomeEmpresaServer: nomeEmpresa,
+                cnpjEmpresaServer: cnpj,
+                areaServer: null
+            };
+
+            const res = await fetch('/registro', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(registroPayload)
+            });
+
+            if (res.status === 200) {
+                const usuario = await res.json();
+                // já retorna o usuário autenticado no formato esperado
+                sessionStorage.EMAIL_USUARIO = usuario.email;
+                sessionStorage.NOME_USUARIO = usuario.nome;
+                sessionStorage.ID_USUARIO = usuario.id;
+                sessionStorage.AQUARIOS = JSON.stringify(usuario.vinhedos || []);
+
+                document.getElementById('div_opcoes').style.display = 'none';
+                document.getElementById('div_exibir').style.display = 'flex';
+                document.getElementById('exibir').innerHTML = `Empresa e usuário criados com sucesso, ${usuario.nome}!`;
+                setTimeout(() => window.location = './dashboard/cards.html', 1000);
+            } else if (res.status === 409) {
+                const txt = await res.text();
+                alert(txt || 'Esse CNPJ já está cadastrado');
+            } else {
+                const txt = await res.text();
+                alert('Erro ao criar empresa/usuário: ' + res.status + ' - ' + txt);
+            }
+        } catch (err) {
+            console.error(err);
+            alert('Erro na conexão: ' + err.message);
         }
-        else {
-            for (let i = 0; i < empresa.length; i++) {
-                if (empresa[i].cnpj_empresa == cnpj_empresa) {
-                    existe = true;
-                }
+    }
+
+    async function doLoginAndRedirect(email, senha) {
+        try {
+            const res = await fetch('/usuarios/autenticar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ emailServer: email, senhaServer: senha })
+            });
+
+            if (res.status === 200) {
+                const usuario = await res.json();
+                sessionStorage.EMAIL_USUARIO = usuario.email;
+                sessionStorage.NOME_USUARIO = usuario.nome;
+                sessionStorage.ID_USUARIO = usuario.id;
+                sessionStorage.AQUARIOS = JSON.stringify(usuario.vinhedos || []);
+
+                document.getElementById('div_opcoes').style.display = 'none';
+                document.getElementById('div_exibir').style.display = 'flex';
+                document.getElementById('exibir').innerHTML = `Cadastro e login efetuados com sucesso, ${usuario.nome}!`;
+                setTimeout(() => window.location = './dashboard/cards.html', 1000);
+            } else {
+                const txt = await res.text();
+                alert('Usuário criado, mas falha ao autenticar: ' + res.status + ' - ' + txt);
             }
-
-            if (existe) {
-                alert(`Esse CNPJ já está cadastrado`)
-            }
-            else {
-                if (numero < 10) {
-                    numero = "0" + numero;
-                }
-
-                let codigo_cadastro = `EMP-2027-${numero}`;
-
-                empresa.push({
-                    nome_empresa: nome_empresa,
-                    cnpj_empresa: cnpj_empresa,
-                    email_base: email_base,
-                    codigo_cadastro: codigo_cadastro
-                });
-
-                usuario[atual].empresa = nome_empresa;
-
-                div_criar.style.display = "none";
-                div_exibir.style.display = "flex";
-                exibir.innerHTML = `Empresa ${nome_empresa} criada!<br>`;
-                exibir.innerHTML = exibir.innerHTML + `Código para os funcionários e clientes entrarem: <b>${codigo_cadastro}</b>`;
-            }
+        } catch (err) {
+            console.error(err);
+            alert('Erro ao autenticar: ' + err.message);
         }
     }
 

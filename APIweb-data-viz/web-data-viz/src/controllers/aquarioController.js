@@ -1,9 +1,10 @@
-var aquarioModel = require("../models/aquarioModel");
+var aquarioModel = require("../models/vinhedoModel");
 
 function buscarAquariosPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
+  // rota definida como '/:empresaId' -> usar empresaId aqui
+  var idEmpresa = req.params.empresaId;
 
-  aquarioModel.buscarAquariosPorEmpresa(idUsuario).then((resultado) => {
+  aquarioModel.buscarPorEmpresa(idEmpresa).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {

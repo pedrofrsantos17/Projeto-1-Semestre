@@ -38,64 +38,52 @@
 </div>
 </body>
 <script>
+  // Função de login real: envia os dados ao endpoint /usuarios/autenticar
+  async function entrar() {
+    const email = (document.getElementById('ipt_email').value || '').trim();
+    const senha = document.getElementById('ipt_senha').value || '';
 
-  // Usuários simulados para demonstração (fiz igual no cadastro mas não botei os negocios de BD)
-  let usuario = [
-    {
-      nome_usuario: "Maria",
-      email: "maria@valeverdevinhos.com",
-      senha: "123456",
-      empresa: "Vale Verde Vinhos"
-    },
-    {
-      nome_usuario: "João",
-      email: "joao@email.com",
-      senha: "abc123",
-      empresa: ""
+    if (!email || !senha) {
+      alert('Preencha email e senha');
+      return;
     }
-  ];
 
-  function entrar() {
-    let email = ipt_email.value;
-    let senha = ipt_senha.value;
-    let achou = null;
+    try {
+      const res = await fetch('/usuarios/autenticar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ emailServer: email, senhaServer: senha })
+      });
 
-    if (email == "" || senha == "") {
-      alert(`Preencha email e senha`)
-    }
-    else {
-      for (let i = 0; i < usuario.length; i++) {
-        if (usuario[i].email == email) {
-          achou = usuario[i];
-        }
+      if (res.status === 200) {
+        const usuario = await res.json();
+        // Salva sessão conforme o restante da app espera
+        sessionStorage.EMAIL_USUARIO = usuario.email;
+        sessionStorage.NOME_USUARIO = usuario.nome;
+        sessionStorage.ID_USUARIO = usuario.id;
+        sessionStorage.AQUARIOS = JSON.stringify(usuario.vinhedos || []);
+
+        // Mostra mensagem breve e redireciona
+        div_login.style.display = 'none';
+        div_exibir.style.display = 'flex';
+        exibir.innerHTML = `Login realizado com sucesso, ${usuario.nome}!`;
+        setTimeout(() => window.location = './dashboard/cards.html', 1000);
+        return;
       }
 
-      if (achou == null) {
-        alert(`Email não cadastrado`)
+      if (res.status === 403) {
+        alert('Email e/ou senha inválido(s)');
+        return;
       }
-      else if (achou.senha != senha) {
-        alert(`Senha incorreta`)
-      }
-      else {
-        div_login.style.display = "none";
-        div_exibir.style.display = "flex";
-        exibir.innerHTML = `Login realizado com sucesso, ${achou.nome_usuario}!`;
 
-        // Armazena a sessão para a dashboard funcionar
-        sessionStorage.EMAIL_USUARIO = achou.email;
-        sessionStorage.NOME_USUARIO = achou.nome_usuario;
-        sessionStorage.ID_USUARIO = achou.id || 1;
-        sessionStorage.AQUARIOS = JSON.stringify([
-          { id: 1, descricao: "Vinhedo Aurora" }
-        ]);
-
-        setTimeout(function () {
-          window.location = "./dashboard/cards.html";
-        }, 2000); // apenas para exibir a mensagem
-      }
+      // outros erros
+      const text = await res.text();
+      alert('Erro no servidor: ' + res.status + ' - ' + text);
+    } catch (err) {
+      console.error('Erro ao conectar no servidor:', err);
+      alert('Erro ao conectar no servidor: ' + err.message);
     }
   }
-
 </script>
 
 </html>

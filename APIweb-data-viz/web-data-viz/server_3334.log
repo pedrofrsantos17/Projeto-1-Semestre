@@ -1,0 +1,194 @@
+
+    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
+    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
+    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
+    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
+    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
+    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
+    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
+    
+
+
+                                                                                                 
+    Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://localhost:3334 :. 
+
+
+    Você está rodando sua aplicação em ambiente de .:desenvolvimento:. 
+
+
+    	Se .:desenvolvimento:. você está se conectando ao banco local. 
+
+    	Se .:producao:. você está se conectando ao banco remoto. 
+
+
+    		Para alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'
+
+
+[
+  {
+    id: 7,
+    nome: 'Teste da API',
+    email: 'teste@api.com',
+    cpf: '11122233344',
+    fk_empresa: 4
+  },
+  {
+    id: 6,
+    nome: 'Bruno Salles',
+    email: 'bruno.salles@rotadasuvas.com',
+    cpf: '12999890900',
+    fk_empresa: 6
+  },
+  {
+    id: 5,
+    nome: 'Camila Duarte',
+    email: 'camila.duarte@vinhedosdealtitude.com',
+    cpf: '21345678909',
+    fk_empresa: 4
+  },
+  {
+    id: 4,
+    nome: 'João Vitor',
+    email: 'joao.vitor@vinhedosdealtitude.com',
+    cpf: '12346658909',
+    fk_empresa: 4
+  },
+  {
+    id: 3,
+    nome: 'Renata Alves',
+    email: 'renata.alves@quintadosol.com.br',
+    cpf: '12345478909',
+    fk_empresa: 2
+  },
+  {
+    id: 2,
+    nome: 'Paulo Henrique',
+    email: 'paulo.henrique@valeverdevinhos.com',
+    cpf: '12345678844',
+    fk_empresa: 1
+  },
+  {
+    id: 1,
+    nome: 'Marina Costa',
+    email: 'marina.costa@valeverdevinhos.com',
+    cpf: '12345678976',
+    fk_empresa: 1
+  }
+]
+[
+  {
+    id: 7,
+    nome: 'Terroir dos Pampas',
+    cnpj: '12.147.968/0001-24',
+    codigo: 'TDP-2026-07',
+    area: '25.00'
+  },
+  {
+    id: 6,
+    nome: 'Cantina Rota das Uvas',
+    cnpj: '65.753.786/0001-63',
+    codigo: 'CRU-2026-06',
+    area: '20.00'
+  },
+  {
+    id: 5,
+    nome: 'Espumantes Dom Bosco',
+    cnpj: '57.646.469/0001-10',
+    codigo: 'EDB-2026-05',
+    area: '20.00'
+  },
+  {
+    id: 4,
+    nome: 'Vinhedos de Altitude',
+    cnpj: '86.475.320/0001-13',
+    codigo: 'VDA-2026-04',
+    area: '28.00'
+  },
+  {
+    id: 3,
+    nome: 'Adega Serrana',
+    cnpj: '15.053.665/0001-30',
+    codigo: 'ADS-2026-03',
+    area: '30.00'
+  },
+  {
+    id: 2,
+    nome: 'Quinta do Sol Vinhos Finos',
+    cnpj: '09.239.557/0001-54',
+    codigo: 'QSV-2026-02',
+    area: '22.00'
+  },
+  {
+    id: 1,
+    nome: 'Vinícola Vale Verde',
+    cnpj: '24.999.432/0001-16',
+    codigo: 'VVV-2026-01',
+    area: '18.50'
+  }
+]
+Executando a instrução SQL: 
+
+        INSERT INTO empresa (nome_empresa, cnpj_empresa, codigo_cadastro, area_hectares)
+        VALUES (?, ?, ?, ?);
+    
+Params:  [ 'Empresa_Test_API', '99.999.999/0001-99', 'SNR-SKV08N', '12.34' ]
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 8,
+  info: '',
+  serverStatus: 2,
+  warningStatus: 0,
+  changedRows: 0
+}
+Executando a instrução SQL: 
+
+        INSERT INTO usuario (fk_empresa, nome_usuario, email, senha, cpf)
+        SELECT id_empresa, ?, ?, ?, ?
+        FROM empresa
+        WHERE codigo_cadastro = ?;
+    
+Params:  [
+  'User Test',
+  'usertest@example.com',
+  'Senha#123',
+  '55566677788',
+  'SNR-SKV08N'
+]
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 14,
+  info: 'Records: 1  Duplicates: 0  Warnings: 0',
+  serverStatus: 2,
+  warningStatus: 0,
+  changedRows: 0
+}
+ACESSEI O USUARIO MODEL - autenticar usertest@example.com
+Executando a instrução SQL: 
+
+        SELECT
+            id_usuario AS id,
+            nome_usuario AS nome,
+            email,
+            fk_empresa AS empresaId
+        FROM usuario
+        WHERE email = ? AND senha = ? AND ativo = 1;
+    
+Params:  [ 'usertest@example.com', 'Senha#123' ]
+[
+  {
+    id: 14,
+    nome: 'User Test',
+    email: 'usertest@example.com',
+    empresaId: 8
+  }
+]
+Executando a instrução SQL: 
+
+        SELECT id_vinhedo AS id, nome_vinhedo AS nome
+        FROM vinhedo
+        WHERE fk_empresa = ?;
+    
+Params:  [ 8 ]
+[]

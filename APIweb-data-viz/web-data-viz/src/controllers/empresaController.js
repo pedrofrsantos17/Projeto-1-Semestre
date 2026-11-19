@@ -1,47 +1,27 @@
 var empresaModel = require("../models/empresaModel");
 
-function buscarPorCnpj(req, res) {
-  var cnpj = req.query.cnpj;
-
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
-function listar(req, res) {
-  empresaModel.listar().then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
-function buscarPorId(req, res) {
-  var id = req.params.id;
-
-  empresaModel.buscarPorId(id).then((resultado) => {
-    res.status(200).json(resultado);
-  });
-}
-
 function cadastrar(req, res) {
-  var cnpj = req.body.cnpj;
-  var razaoSocial = req.body.razaoSocial;
+    // aceitar nomes diferentes de campos que podem vir do cliente
+    var nome = (req.body.nomeServer || req.body.nome_empresa || req.body.nomeEmpresaServer || '').trim();
+    var cnpj = req.body.cnpjServer || req.body.cnpjEmpresaServer || req.body.cnpj || '';
+    var area = req.body.areaServer || req.body.area || null;
 
-  empresaModel.buscarPorCnpj(cnpj).then((resultado) => {
-    if (resultado.length > 0) {
-      res
-        .status(401)
-        .json({ mensagem: `a empresa com o cnpj ${cnpj} já existe` });
+    if (!nome || !cnpj) {
+        res.status(400).send("Faltam nome ou CNPJ da empresa!");
     } else {
-      empresaModel.cadastrar(razaoSocial, cnpj).then((resultado) => {
-        res.status(201).json(resultado);
-      });
+        empresaModel.cadastrar(nome, cnpj, area)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                if (erro.code == "ER_DUP_ENTRY") {
+                    res.status(409).send("Esse CNPJ já está cadastrado");
+                } else {
+                    res.status(500).json(erro.sqlMessage);
+                }
+            });
     }
-  });
 }
 
-module.exports = {
-  buscarPorCnpj,
-  buscarPorId,
-  cadastrar,
-  listar,
-};
+module.exports = { cadastrar };

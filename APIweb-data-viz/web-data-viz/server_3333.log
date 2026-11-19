@@ -1,0 +1,125 @@
+
+    ##   ##  ######   #####             ####       ##     ######     ##              ##  ##    ####    ######  
+    ##   ##  ##       ##  ##            ## ##     ####      ##      ####             ##  ##     ##         ##  
+    ##   ##  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##        ##   
+    ## # ##  ####     #####    ######   ##  ##   ######     ##     ######   ######   ##  ##     ##       ##    
+    #######  ##       ##  ##            ##  ##   ##  ##     ##     ##  ##            ##  ##     ##      ##     
+    ### ###  ##       ##  ##            ## ##    ##  ##     ##     ##  ##             ####      ##     ##      
+    ##   ##  ######   #####             ####     ##  ##     ##     ##  ##              ##      ####    ######  
+    
+
+
+                                                                                                 
+    Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar .: http://localhost:3333 :. 
+
+
+    Você está rodando sua aplicação em ambiente de .:desenvolvimento:. 
+
+
+    	Se .:desenvolvimento:. você está se conectando ao banco local. 
+
+    	Se .:producao:. você está se conectando ao banco remoto. 
+
+
+    		Para alterar o ambiente, comente ou descomente as linhas 1 ou 2 no arquivo 'app.js'
+
+
+ACESSEI O AVISO  MODEL 
+ 
+		 >> Se aqui der erro de 'Error: connect ECONNREFUSED',
+ 		 >> verifique suas credenciais de acesso ao banco
+ 		 >> e se o servidor de seu BD está rodando corretamente. 
+
+ function listar()
+Executando a instrução SQL: 
+
+        SELECT 
+            a.id_aviso AS idAviso,
+            a.titulo,
+            a.descricao,
+            a.fk_usuario,
+            u.id_usuario AS idUsuario,
+            u.nome_usuario AS nome,
+            u.email AS email
+        FROM aviso a
+            INNER JOIN usuario u
+                ON a.fk_usuario = u.id_usuario;
+    
+[]
+ACESSEI O USUARIO MODEL - autenticar usertest@example.com
+Executando a instrução SQL: 
+
+        SELECT
+            id_usuario AS id,
+            nome_usuario AS nome,
+            email,
+            fk_empresa AS empresaId
+        FROM usuario
+        WHERE email = ? AND senha = ? AND ativo = 1;
+    
+Params:  [ 'usertest@example.com', 'Senha#123' ]
+[
+  {
+    id: 14,
+    nome: 'User Test',
+    email: 'usertest@example.com',
+    empresaId: 8
+  }
+]
+Executando a instrução SQL: 
+
+        SELECT id_vinhedo AS id, nome_vinhedo AS nome
+        FROM vinhedo
+        WHERE fk_empresa = ?;
+    
+Params:  [ 8 ]
+[]
+Executando a instrução SQL: 
+
+        INSERT INTO usuario (fk_empresa, nome_usuario, email, senha, cpf)
+        SELECT id_empresa, ?, ?, ?, ?
+        FROM empresa
+        WHERE codigo_cadastro = ?;
+    
+Params:  [ 'aura67', 'aura@gmail.com', 'aura123', '11111111234', 'SNR-SKV08N' ]
+ResultSetHeader {
+  fieldCount: 0,
+  affectedRows: 1,
+  insertId: 15,
+  info: 'Records: 1  Duplicates: 0  Warnings: 0',
+  serverStatus: 2,
+  warningStatus: 0,
+  changedRows: 0
+}
+ACESSEI O USUARIO MODEL - autenticar aura@gmail.com
+Executando a instrução SQL: 
+
+        SELECT
+            id_usuario AS id,
+            nome_usuario AS nome,
+            email,
+            fk_empresa AS empresaId
+        FROM usuario
+        WHERE email = ? AND senha = ? AND ativo = 1;
+    
+Params:  [ 'aura@gmail.com', 'aura123' ]
+[ { id: 15, nome: 'aura67', email: 'aura@gmail.com', empresaId: 8 } ]
+Executando a instrução SQL: 
+
+        SELECT id_vinhedo AS id, nome_vinhedo AS nome
+        FROM vinhedo
+        WHERE fk_empresa = ?;
+    
+Params:  [ 8 ]
+[]
+SyntaxError: Bad escaped character in JSON at position 14 (line 1 column 15)
+    at JSON.parse (<anonymous>)
+    at parse (C:\AULAS DE PI\api grupo\Projeto-1-Semestre\APIweb-data-viz\web-data-viz\node_modules\body-parser\lib\types\json.js:96:19)
+    at C:\AULAS DE PI\api grupo\Projeto-1-Semestre\APIweb-data-viz\web-data-viz\node_modules\body-parser\lib\read.js:146:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:227:14)
+    at invokeCallback (C:\AULAS DE PI\api grupo\Projeto-1-Semestre\APIweb-data-viz\web-data-viz\node_modules\raw-body\index.js:238:16)
+    at done (C:\AULAS DE PI\api grupo\Projeto-1-Semestre\APIweb-data-viz\web-data-viz\node_modules\raw-body\index.js:227:7)
+    at IncomingMessage.onEnd (C:\AULAS DE PI\api grupo\Projeto-1-Semestre\APIweb-data-viz\web-data-viz\node_modules\raw-body\index.js:287:7)
+    at IncomingMessage.emit (node:events:514:28)
+    at endReadableNT (node:internal/streams/readable:1764:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)

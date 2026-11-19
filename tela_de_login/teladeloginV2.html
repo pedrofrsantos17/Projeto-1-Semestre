@@ -39,52 +39,45 @@
 </body>
 
 <script>
-
-  // Usuários simulados para demonstração (fiz igual no cadastro mas não botei os negocios de BD)
-  let usuario = [
-    {
-      nome_usuario: "Maria",
-      email: "maria@valeverdevinhos.com",
-      senha: "123456",
-      empresa: "Vale Verde Vinhos"
-    },
-    {
-      nome_usuario: "João",
-      email: "joao@email.com",
-      senha: "abc123",
-      empresa: ""
-    }
-  ];
-
   function entrar() {
     let email = ipt_email.value;
     let senha = ipt_senha.value;
-    let achou = null;
 
     if (email == "" || senha == "") {
-      alert(`Preencha email e senha`)
+      alert(`Preencha email e senha`);
+      return;
     }
-    else {
-      for (let i = 0; i < usuario.length; i++) {
-        if (usuario[i].email == email) {
-          achou = usuario[i];
+
+    fetch("http://localhost:3333/usuarios/autenticar", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ emailServer: email, senhaServer: senha })
+    })
+      .then(function (resposta) {
+        if (resposta.ok) {
+          resposta.json().then(function (json) {
+            sessionStorage.ID_USUARIO = json.id;
+            sessionStorage.NOME_USUARIO = json.nome;
+            sessionStorage.EMAIL_USUARIO = json.email;
+            sessionStorage.ID_EMPRESA = json.empresaId;
+            sessionStorage.VINHEDOS = JSON.stringify(json.vinhedos);
+
+            div_login.style.display = "none";
+            div_exibir.style.display = "flex";
+            exibir.innerHTML = `Login realizado com sucesso, ${json.nome}!`;
+            // depois: window.location = "../Dashboard_Geral_Sensor2/dashboard.html";
+          });
+        } else {
+          resposta.text().then(function (texto) {
+            alert(texto);
+          });
         }
-      }
-
-      if (achou == null) {
-        alert(`Email não cadastrado`)
-      }
-      else if (achou.senha != senha) {
-        alert(`Senha incorreta`)
-      }
-      else {
-        div_login.style.display = "none";
-        div_exibir.style.display = "flex";
-        exibir.innerHTML = `Login realizado com sucesso, ${achou.nome_usuario}!`;
-      }
-    }
+      })
+      .catch(function (erro) {
+        console.log(erro);
+        alert("Não foi possível falar com a API. Ela está rodando?");
+      });
   }
-
 </script>
 
 </html>
